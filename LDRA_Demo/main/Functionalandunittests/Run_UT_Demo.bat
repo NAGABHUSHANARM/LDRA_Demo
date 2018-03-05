@@ -26,7 +26,7 @@ setlocal
 rem Configure paths that are likely to change
 rem =========================================
 set PRJ_NAME=LDRA_demo
-set TCF_ROOT=C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Functionalandunittests
+set TCF_ROOT=%cd%
 
 rem remove any existing SET_TEST.BAT file
 rem =====================================
