@@ -1,0 +1,201 @@
+#
+# Column meanings:
+# ----------------
+#
+#   1) 1/0 on/off display of metric.
+#
+#   2) Identifier
+#
+#   3) Scope character:
+#                       S=System
+#                       F=File only
+#                       P=For each Procedure in the file and for the File as a whole
+#                       C=Class (OO)
+#   4) Value type:
+#                       r = real
+#                       i = integer
+#
+#   5) Configurable lower boundary.
+#
+#   6) Configurable upper boundary.
+#
+# [ 7) Configurable lower boundary or c 'calculate' marker for file in 'P' Scope metrics ]
+#
+# [ 8) Configurable upper boundary or c 'calculate' marker for file in 'P' Scope metrics ]
+#
+#   The last column is a description of the metric
+#
+# =================================================================
+#
+# System metrics
+# --------------
+#
+#  Id  Scope  Type    System        Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  0   S      i      0    200     "Essential Knots"
+ 1  1   S      i      1    500     "Essential Cyclomatic Complexity"
+ 1  2   S      i      0    200     "Knots"
+ 1  3   S      i      1    500     "Cyclomatic Complexity"
+ 1  4   S      i      1    5000    "Executable Lines in System"
+ 0  -1
+#
+# File and procedure metrics
+# --------------------------
+#
+# Columns 7 and 8 apply to 'P' scope metrics only. These contain the upper and lower
+# boundaries for the file as a whole. These can be fixed or given a 'c' marker.
+#
+# If either column 7 or 8 contains a 'c' (calculate) character then
+# the appropriate minimum or maximum value for the FILE is calculated
+# in terms of the value set for a PROCEDURE (column 5 or 6) and N,
+# normally the number of procedures in the file.
+#
+# Metric limits for a file can also be based on the MAXIMUM number of
+# procedures (metric Id 56). Thus all files can be compared to the same standard.
+#
+#
+# Complexity metrics
+# ------------------
+#
+#  Id  Scope  Type   Procedure   File        Description
+#                     Min  Max    Min  Max
+#------------------------------------------------------------
+ 1  0   P      i      0    1      0    c     "Essential Knots"
+ 1  1   P      i      1    1      1    c     "Essential Cyclomatic Complexity"
+ 1  2   P      i      0    100    0    c     "Knots"
+ 1  3   P      i      1    25     1    c     "Cyclomatic Complexity"
+ 1  4   P      i      1    1      1    1     "Procedure is Structured"
+#
+# Comments associated with procedures
+# -----------------------------------
+#
+#  Id  Scope  Type    Procedure   File        Description
+#                     Min  Max    Min  Max
+#------------------------------------------------------------
+ 0  5   P      i      2    1000   c    c     "Total Comments"
+ 1  6   P      i      2    1000   2    c     "Comments in Headers"
+ 0  7   P      i      1    1000   c    c     "Comments in Declarations"
+ 0  8   P      i      0    1000   c    c     "Comments in Executable Code"
+ 0  9   P      i      0    1000   c    c     "Blank Comments"
+#
+# Ratio of Comments to executable lines (%)
+# -----------------------------------------
+#  Id  Scope  Type    Procedure   File        Description
+#                     Min  Max    Min  Max
+#------------------------------------------------------------
+ 0 10   P      i      2    1000   10   200   "Total Comments / exe. lines"
+ 0 11   P      i      0    1000   0    0     "Header Comments / exe. lines"
+ 0 12   P      i      0    100    1    100   "Declarations Comments / exe. lines"
+ 0 13   P      i      0    200    5    200   "Code Comments / exe. lines"
+#
+# File based OO
+# -------------
+#
+#  Id  Scope  Type    File        Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  14  C      i      0    10     "Total Classes Declared"
+ 1  15  C      i      0    10     "Total Objects Created"
+#
+# Class based OO
+# --------------
+#  Id  Scope  Type    Class       Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  21  C      i      0    100    "Number of children (NOC)"
+ 1  22  C      i      0    100    "Objects Created"
+ 1  23  C      i      0    32     "Number of Data Members"
+ 1  24  C      i      0    32     "Number of Members (WMC)"
+#
+# with base classes
+# -----------------
+#  Id  Scope  Type    Class       Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  25  C      i      0    10     "Total Base Classes"
+ 1  26  C      i      0    30     "Total Data Members"
+ 1  27  C      i      1    40     "Total Members"
+ 1  28  C      i      0    5      "Inheritance Depth (DIT)"
+#
+# with base classes 2
+# -------------------
+#  Id  Scope  Type    Class       Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  16  C      i      0    10     "Static Members"
+ 1  17  C      i      0    10     "Out-of-class variable uses"
+ 1  18  C      i      0    10     "Out-of-class procedure calls"
+ 1  19  C      i      0    10     "External class methods used"
+ 1  20  C      i      0    20     "Out-of-class objects used"
+#
+# Procedure Information
+# ---------------------
+#  Id  Scope  Type    Procedure   File        Description
+#                     Min  Max    Min  Max
+#------------------------------------------------------------
+ 1  29  P      i      2    200    0    c     "Executable reformatted Lines"
+ 1  30  P      i      1    30     0    c     "Number of Basic Blocks"
+ 1  31  P      r      1.0  32.0   1.0  32.0  "Average Lines per Basic Block"
+ 1  49  P      i      1    1      1    c     "Procedure Entry Points"
+ 1  50  P      i      0    1      c    c     "Procedure Exit Points"
+#
+# Halsteads metrics
+# -----------------
+#  Id  Scope  Type    File        Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  35  F      i      0    700    "Total Operators"
+ 1  36  F      i      0    1500   "Total Operands"
+ 1  37  F      i      0    40     "Unique Operators"
+ 1  38  F      i      0    300    "Unique Operands"
+ 1  39  F      i      0    340    "Vocabulary"
+ 1  40  F      i      0    3000   "Length"
+ 1  41  F      i      0    20000  "Volume"
+#
+# LCSAJ and Unreachability information
+# ------------------------------------
+#  Id  Scope  Type    File        Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  42  F      i      0    1000   "Total LCSAJs"
+ 1  59  F      i      0    1000   "Reachable LCSAJs"
+ 1  43  F      i      0    10     "Unreachable LCSAJs"
+ 1  44  F      i      0    50     "Maximum LCSAJ Density"
+ 1  45  F      i      0    10     "Unreachable Lines"
+ 1  46  F      i      0    20     "Unreachable Branches"
+#
+# Loop/Interval analysis
+# ----------------------
+#  Id  Scope  Type    Procedure   File        Description
+#                     Min  Max    Min  Max
+#------------------------------------------------------------
+ 1  47  P      i      0    4      0    c      "Number of Loops"
+ 1  48  P      i      0    2      0    c      "Depth of Loop Nesting"
+ 1  32  P      i      0    8      0    c      "Number of Order 1 Intervals"
+ 1  33  P      i      0    3      0    3      "Maximum Interval Nesting"
+ 1  34  P      i      1    1      1    1      "Reducible (Intervals)"
+#
+# Reformatted code information
+# ----------------------------
+#  Id  Scope  Type    File        Description
+#                     Min  Max
+#------------------------------------------------------------
+ 1  51  F      i      1    4000  "Total reformatted Lines"
+ 1  52  F      i      2    1000  "Total comments in ref. Code"
+ 1  53  F      i      0    1000  "Total blank lines"
+ 1  54  F      i      0    2000  "Executable ref. Lines"
+ 1  55  F      i      1    1000  "Non-executable ref. Lines"
+ 1  56  F      i      0    40    "Number of Procedures"
+ 1  57  F      i      1    4000  "Total source Lines"
+ 1  58  F      r      0.5  10.0  "Expansion Factor"
+#
+# DataFlow analysis
+# ----------------------
+#  Id  Scope  Type    Procedure   File        Description
+#                     Min  Max    Min  Max
+#------------------------------------------------------------
+ 1  63  P      i      0    100    0    c      "Number of Globals"
+ 1  64  P      i      0    10     c    c      "Fan in"
+ 1  65  P      i      0    10     0    c      "Fan out"
+ 0  -1

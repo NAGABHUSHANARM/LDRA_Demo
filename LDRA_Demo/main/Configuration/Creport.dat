@@ -1,0 +1,2794 @@
+#
+# This is the data file for the Quality report writer
+# and TBBrowse viewing of annotated results and source files.
+# It contains all the penalties (taken from the PEN file) which the program
+# checks for.
+#
+# All lines starting with # (MUST be in first column)
+# are treated as comments
+#
+# All data lines start with at least one space.
+#
+# The file is organised into four sections.
+#
+# =====================================================================
+# Section one
+#
+# Lines in this section have one field; a string delimited by quotation
+# marks (").
+# The section is terminated by a -1 which must not be removed.
+#
+# The text within the quotation marks is the name of a Programming
+# Standards Model which may be used to select a sub-set of standards from
+# Section 2. Users may add Standards Models as required, with a maximum
+# length of 18 characters (20 with quotation mark delimiters).
+#
+# The Model used by the Quality Report writer is set by the
+# environment variable <lang>STANDARDS_MODEL.
+# By default, all standards are selected.
+#
+# User defined descriptions of Mandatory, Checking and Optional standards can also
+# be added to this section. Following any standards models, a quote (")
+# delimited string of form "<Model>:<M/C/O/I>:<User description>" can be added.
+# For example: "MISRA:M:Required"
+# This will cause the string "Mandatory" in the Quality Report to be
+# replaced with "Required" when the MISRA model is selected.
+#
+# Note regarding user-defined Standards Models and MISRA.
+# --------------------------------------------------------------
+#
+# The TBMisra module must be purchased to fully enable MISRA derived
+# Programming Standards. If TBMisra is available, static analysis flags
+# which affect programming standards results may be set automatically.
+# These flags are located in the cvals.dat or cppvals.dat files:
+#
+# 119 MISRA Flag. Always enabled with TBMisra licence.
+# 191 MISRA 2 Flag. Enabled with TBMisra licence and MISRA-C:2004 model selected.
+# 331 MISRA C++ Flag. Enabled with TBMisra licence and MISRA-C++:2008 model selected.
+#
+# All the above are always automatically disabled when no TBMisra licence is available.
+#
+# Users wishing to create MISRA derived models and name them something different
+# (e.g. "MY_MISRA") below should set the appropriate flags in the cvals.dat or
+# cppvals.dat files manually, as well as ensuring that the TBMisra licence
+# has been purchased.
+#
+ "ACME Standard"
+ "CAST"
+ "CERT"
+ "CMSE"
+ "CONFORM"
+ "CWE"
+ "Customer Sample"
+ "DERA"
+ "EADS"
+ "FSB582-C"
+ "GJB"
+ "HIS"
+ "JPL"
+ "Legacy"
+ "MISRA-AC"
+ "MISRA"
+ "MISRA-C:2004"
+ "MISRA-C:2012"
+ "NETRINO"
+ "RUNTIME"
+ "SEC-C"
+ "Standard"
+ "TBrun Requires"
+ "UML"
+ "VSOS"
+
+ "ACME Standard:C:Required"
+ "ACME Standard:O:Advisory"
+ "ACME Standard:I:Document"
+ "CERT:M:Rule"
+ "CERT:O:Recommendation"
+ "CWE:M:Rule"
+ "EADS:M:Shall"
+ "EADS:C:Should"
+ "FSB582-C:O:Discretionary"
+ "JPL:M:Rule"
+ "MISRA-AC:M:Obligatory"
+ "MISRA-AC:C:Obligatory(Checking)"
+ "MISRA-AC:O:Recommended"
+ "MISRA-AC:I:Readability"
+ "MISRA:M:Required"
+ "MISRA:C:Required (Checking)"
+ "MISRA:O:Advisory"
+ "MISRA:I:Document"
+ "MISRA-C:2004:M:Required"
+ "MISRA-C:2004:C:Required (Checking)"
+ "MISRA-C:2004:O:Advisory"
+ "MISRA-C:2004:I:Document"
+ "MISRA-C:2012:C:Required"
+ "MISRA-C:2012:O:Advisory"
+ "MISRA-C:2012:I:Document"
+ -1
+#
+# =====================================================================
+# Section two
+#
+# Lines in this section have a minimum of three fields.
+# The first three fields are a number followed by two letters
+# The number and first letter are the phase number and letter
+# as specified in the <lang>pen.dat file.
+#
+# Note that the C/C++ LDRA Testbed uses the same numbering sequence for
+# C and C++ standards. Gaps in the numerical sequence occur because some standards
+# apply only to C, and some only to C++.
+#
+# The second letter classifies the standards as follows:
+#   M - Mandatory standard. Cannot be violated
+#   C - Mandatory standard. Must be checked but may be overridden
+#   O - Optional standard. If violated will not cause the program
+#          to be rejected but will get a conditional pass
+#   I - Informational standard. Does not affect pass/fail result.
+#
+# Following the first three fields there can be between 0 and 20 further
+# fields. These are quote(") delimited strings identifying those Programming
+# Standards Models which apply to that standard.
+#
+# Model Specific Modifiers
+# ------------------------
+# The model can be used to modify default settings for a particular standard.
+# This is done by appending modifiers separated by ':' characters, in combination where
+# appropriate.
+#
+# Changing M/C/O/I classification - append the appropriate letter, e.g.
+#
+#  3 S M "Standard:O"
+#
+# The following modifiers affect analysis - so the appropriate analysis phase(s) must
+# be rerun for changes to take effect.
+#
+# Changing the value of parameterised standards (***), e.g.
+#
+#  3 S M "Standard:20"
+#
+# Changing the values of flags in the vals or tbend data files that relate
+# to this standard, e.g.
+#
+#  12 S M "MISRA:tbend F"
+#  64 S M "MISRA:vals 218 1"
+#
+# For the vals or tbend modifications it is recommended that users consult
+# with LDRA Technical support before making changes.
+#
+# =====================================================================
+#
+#
+#
+# 'S' phase standards
+# -------------------
+#
+   1 S C "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:C" "FSB582-C:M" "GJB:M" "HIS:C" "Legacy:I" "MISRA-AC:O" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "SEC-C:M" "VSOS:C" "PDTMCSFVA:000300000" "K:id"
+# Procedure name reused.
+#
+   2 S M "CAST:M" "CMSE:M" "DERA:O" "GJB:M" "MISRA-AC:I" "MISRA:O" "MISRA-C:2004:O" "VSOS:M" "PDTMCSFVA:300000000" "K:id"
+# Label name reused.
+#
+   3 S M "CMSE:O" "Customer Sample:M" "EADS:C:1000" "GJB:O" "Standard:M" "VSOS:O" "PDTMCSFVA:000030000" "K:style"
+# More than *** executable reformatted lines in file.
+#
+   4 S M "CAST:O" "CMSE:O" "Customer Sample:M" "FSB582-C:O:1000" "GJB:O" "Standard:M" "VSOS:O:1000" "PDTMCSFVA:000030000" "K:style"
+# Procedure exceeds *** reformatted lines.
+#
+   5 S C "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:C" "FSB582-C:O" "GJB:M" "SEC-C:M" "PDTMCSFVA:000002210" "K:if"
+# Empty then clause.
+#
+   6 S O "CAST:O" "CMSE:M" "GJB:M" "JPL:M" "PDTMCSFVA:022000200" "K:ptr"
+# Procedure pointer declared.
+#
+   7 S C "CAST:M" "CMSE:M" "Customer Sample:C" "GJB:M" "Legacy:O" "Standard:C" "VSOS:C" "PDTMCSFVA:200000100" "K:jmp"
+# Jump out of procedure.
+#
+   8 S C "CAST:M" "CMSE:M" "FSB582-C:O" "GJB:O" "SEC-C:M" "PDTMCSFVA:000002200" "K:if"
+# Empty else clause.
+#
+   9 S C "ACME Standard:C" "CERT:M" "CMSE:M" "Customer Sample:C" "DERA:C" "EADS:M" "FSB582-C:O" "GJB:M" "HIS:C" "Legacy:I:vals 259 1" "MISRA-AC:C" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "NETRINO:C" "SEC-C:M" "Standard:C" "UML:C" "VSOS:M" "PDTMCSFVA:002200220" "K:exp"
+# Assignment operation in expression.
+#
+# 10 S
+# Not used for 'c'.
+#
+  11 S M "ACME Standard:C" "CAST:M" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "EADS:M" "GJB:M" "HIS:M" "Legacy:I" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000300000" "K:loop"
+# No brackets to loop body (added by Testbed).
+#
+  12 S M "ACME Standard:C:tbend F" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "EADS:M:tbend F" "FSB582-C:O" "GJB:M" "HIS:M:tbend F" "Legacy:I" "MISRA-AC:O:tbend F" "MISRA:M:tbend F" "MISRA-C:2004:M:tbend F" "MISRA-C:2012:C:tbend F" "NETRINO:M" "SEC-C:M:tbend F" "Standard:M:tbend F" "UML:O:tbend F" "VSOS:M:tbend F" "PDTMCSFVA:000300020" "K:if"
+# No brackets to then/else (added by Testbed).
+#
+  13 S M "ACME Standard:O" "CAST:M" "CMSE:M" "Customer Sample:M" "DERA:M" "EADS:M" "GJB:M" "HIS:M" "JPL:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "NETRINO:M" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000020100" "K:jmp"
+# goto detected.
+#
+  14 S O "CMSE:O" "DERA:O" "GJB:O" "PDTMCSFVA:000220000" "K:fnpar"
+# Procedural parameter declared.
+#
+  15 S M "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "UML:M" "VSOS:M" "PDTMCSFVA:000300000" "K:struct"
+# Anonymous field to structure.
+#
+  16 S O "CAST:M" "CMSE:M" "GJB:M" "PDTMCSFVA:000300000" "K:jmp"
+# Multiple labels declared.
+#
+  17 S O "ACME Standard:I" "DERA:O" "Legacy:I" "MISRA:O" "MISRA-C:2012:I" "VSOS:O" "PDTMCSFVA:300000000" "K:file"
+# Code insert found.
+#
+  18 S M "CAST:O" "CMSE:O" "Customer Sample:M" "FSB582-C:O" "GJB:O" "Standard:M" "UML:M" "PDTMCSFVA:000030000" "K:fnpar"
+# More than *** parameters in procedure.
+#
+  19 S C "CAST:O" "CMSE:O" "Customer Sample:C" "GJB:O" "Standard:C" "VSOS:M" "PDTMCSFVA:000220000" "K:fnpar"
+# Procedural para used in an uncalled procedure.
+#
+  20 S M "ACME Standard:C" "CAST:M" "CERT:M" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "PDTMCSFVA:300000000" "K:fnpar"
+# Parameter not declared explicitly.
+#
+  21 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CONFORM:M" "CWE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "Standard:M" "VSOS:M" "PDTMCSFVA:300000300" "K:fnpar"
+# Number of parameters does not match.
+#
+  22 S C "Customer Sample:C" "DERA:C" "GJB:M" "HIS:C" "Legacy:O" "MISRA:M" "Standard:C" "UML:C" "VSOS:M" "PDTMCSFVA:300000000" "K:misc"
+# Use of obsolete language feature ( use = - ).
+#
+  23 S C "CAST:O" "CMSE:O" "CWE:M" "GJB:M" "Legacy:I" "PDTMCSFVA:000300000" "K:flow"
+# Procedure is not called in text analysed.
+#
+  24 S M "CMSE:O" "GJB:O" "Legacy:M" "PDTMCSFVA:003000000" "K:misc"
+# Use of Noanalysis annotation.
+#
+  25 S O "CAST:O" "CMSE:M" "Customer Sample:O" "GJB:M" "RUNTIME:O" "Standard:O" "PDTMCSFVA:000030200" "K:switch"
+# Null case(s) in switch statement.
+#
+  26 S C "CAST:O" "CMSE:O" "Customer Sample:C" "DERA:C" "EADS:C" "GJB:O" "JPL:M" "Legacy:O" "RUNTIME:C" "SEC-C:M" "Standard:C" "TBrun Requires:C" "VSOS:M" "PDTMCSFVA:000020200" "K:loop"
+# Infinite loop used.
+#
+  27 S M "CAST:M" "CMSE:M" "CWE:M" "DERA:M" "EADS:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA:M" "VSOS:M" "PDTMCSFVA:030000300" "K:fn"
+# Void procedure with return statement.
+#
+# 28 S
+# Not used for 'c'.
+#
+  29 S C "CAST:O" "CMSE:O" "GJB:O" "VSOS:M" "PDTMCSFVA:030000100" "K:exp"
+# Use of += or -= operators found.
+#
+  30 S C "ACME Standard:C:vals 122 1" "CERT:M" "CMSE:O" "CWE:M:vals 122 1" "DERA:C" "FSB582-C:O:vals 122 1:122" "GJB:O" "HIS:C" "MISRA-AC:C" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:C:vals 122 1" "SEC-C:M:vals 122 1" "UML:C" "VSOS:M" "PDTMCSFVA:030000100" "K:exp"
+# Deprecated usage of ++ or -- operators found.
+#
+  31 S M "CMSE:O" "Customer Sample:M" "DERA:M" "EADS:M" "GJB:O" "HIS:M" "MISRA:M" "NETRINO:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000030100" "K:jmp"
+# Use of break statement in loop.
+#
+  32 S M "CAST:O" "CMSE:O" "Customer Sample:M" "DERA:M" "EADS:M" "GJB:O" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "NETRINO:M" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000030000" "K:jmp"
+# Use of continue statement.
+#
+  33 S O "CAST:O" "CMSE:O" "EADS:C" "GJB:O" "VSOS:M" "PDTMCSFVA:000220000" "K:exp"
+# Use of ternary operator found.
+#
+  34 S O "CAST:M" "CMSE:M" "Customer Sample:O" "GJB:M" "Legacy:I" "Standard:O" "PDTMCSFVA:000300000" "K:fnpar"
+# No parameters declared in proc specification.
+#
+  35 S C "ACME Standard:C" "CAST:M" "CMSE:M" "CWE:M" "Customer Sample:C" "GJB:M" "Legacy:I" "MISRA-C:2012:C" "SEC-C:M" "Standard:C" "PDTMCSFVA:000300000" "K:flow"
+# Static procedure is not called in text analysed.
+#
+  36 S M "ACME Standard:M" "CAST:M" "CMSE:M" "CONFORM:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "SEC-C:O" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000300" "K:fn"
+# Function has no return statement.
+#
+  37 S M "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:100000300" "K:fnpar"
+# Procedure parameter has a type but no identifier.
+#
+# 38 S
+# Not used for 'c'.
+#
+  39 S M "ACME Standard:C" "CAST:M" "CERT:M" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:I" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "UML:M" "VSOS:M" "PDTMCSFVA:300000210" "K:loop"
+# Unsuitable type for loop variable.
+#
+  40 S O "CAST:M" "CMSE:M" "Customer Sample:O" "GJB:M" "Standard:O" "PDTMCSFVA:000003000" "K:loop"
+# Loop index is not declared locally.
+#
+  41 S M "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "JPL:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:003200100" "K:fnpar"
+# Ellipsis used in procedure parameter list.
+#
+  42 S C "CAST:O" "CMSE:O" "GJB:O" "MISRA-AC:I" "MISRA-C:2004:I" "SEC-C:M" "UML:C" "PDTMCSFVA:300000000" "K:struct"
+# Use of bit field in structure declaration.
+#
+  43 S M "ACME Standard:C" "CAST:O" "CERT:M" "CMSE:O" "Customer Sample:M" "DERA:M" "GJB:O" "HIS:M" "JPL:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:200030020" "K:jmp"
+# Use of setjmp/longjmp.
+#
+  44 S M "ACME Standard:C" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "JPL:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:002000030" "K:obj" "K:fn"
+# Use of banned function or variable.
+#
+  45 S C "CAST:M" "CMSE:M" "Customer Sample:C" "GJB:M" "Legacy:O" "NETRINO:M" "Standard:C" "PDTMCSFVA:300000000" "K:misc"
+# Use of C++ keyword.
+#
+  46 S O "CAST:M" "CMSE:M" "GJB:M" "VSOS:O" "PDTMCSFVA:000200100" "K:file"
+# extern not in nominated include file.
+#
+  47 S M "ACME Standard:C" "CAST:M" "CERT:M" "CMSE:M" "CONFORM:M" "CWE:M" "DERA:M" "GJB:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "VSOS:O" "PDTMCSFVA:030000330" "K:arr"
+# Array bound exceeded.
+#
+  48 S M "ACME Standard:C" "CAST:M" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "EADS:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:M:vals 252 1" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000003000" "K:switch"
+# No default case in switch statement.
+#
+  49 S M "ACME Standard:O:vals 206 1" "CAST:M" "CERT:O:vals 206 1" "CMSE:M" "CWE:M:vals 206 1" "DERA:M" "EADS:M:vals 206 1" "GJB:M" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O:vals 206 1" "NETRINO:M" "SEC-C:M" "UML:O" "VSOS:M" "PDTMCSFVA:000202200" "K:if"
+# Logical conjunctions need brackets.
+#
+  50 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "RUNTIME:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:200000230" "K:exp"
+# Use of shift operator on signed type.
+#
+  51 S M "ACME Standard:C" "CAST:M" "CMSE:M" "CONFORM:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000300" "K:exp"
+# Shifting value too far.
+#
+  52 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:200000200" "K:conv"
+# Unsigned expression negated.
+#
+  53 S M "ACME Standard:O" "CAST:O" "CMSE:O" "DERA:M" "GJB:O" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:000003000" "K:exp"
+# Use of comma operator.
+#
+  54 S O "ACME Standard:M" "CERT:O" "CMSE:O" "CWE:M" "Customer Sample:O" "DERA:O" "GJB:O" "HIS:O" "Legacy:O" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:M" "SEC-C:O" "Standard:O" "UML:O" "VSOS:M" "PDTMCSFVA:030000210" "K:exp"
+# Sizeof operator with side effects.
+#
+  55 S C "CAST:M" "CMSE:M" "DERA:C" "GJB:M" "HIS:C" "MISRA:C" "VSOS:C" "PDTMCSFVA:300000200" "K:exp"
+# Expression with more than one function.
+#
+  56 S M "CAST:O" "CERT:M" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "EADS:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA:M" "MISRA-C:2004:M" "NETRINO:M" "RUNTIME:M" "SEC-C:O:vals 223 1" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:200000200" "K:exp"
+# Equality comparison of floating point.
+#
+  57 S C "ACME Standard:C" "CAST:O" "CERT:O" "CMSE:M" "CWE:M" "DERA:C" "GJB:O" "HIS:C" "Legacy:I" "MISRA-AC:C" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "SEC-C:M" "UML:C" "VSOS:M" "PDTMCSFVA:000210210" "K:stmt"
+# Statement with no side effect.
+#
+  58 S M "CAST:O" "CERT:O" "CMSE:O" "DERA:M" "GJB:O" "HIS:M" "Legacy:I" "MISRA-AC:C" "MISRA:M" "MISRA-C:2004:C" "SEC-C:M" "VSOS:M" "PDTMCSFVA:000200210" "K:stmt"
+# Null statement found.
+#
+  59 S O "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:O" "FSB582-C:O" "GJB:M" "HIS:O" "MISRA-AC:I" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:O" "VSOS:O" "PDTMCSFVA:000003010" "K:if"
+# Else alternative missing in if.
+#
+  60 S M "ACME Standard:C" "CMSE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000030200" "K:switch"
+# Empty switch statement.
+#
+  61 S M "ACME Standard:C" "CMSE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000030200" "K:switch"
+# Switch contains default only.
+#
+  62 S M "ACME Standard:C" "CAST:O" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "EADS:M" "FSB582-C:O" "GJB:M" "HIS:M" "Legacy:I:vals 283 1" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:C" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000030200" "K:switch"
+# Switch case not terminated with break.
+#
+  63 S M "ACME Standard:C" "CAST:M" "CMSE:M" "Customer Sample:M" "DERA:M" "EADS:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:000003100" "K:fnpar"
+# Empty parameter list to procedure/function.
+#
+  64 S M "ACME Standard:C:vals 218 1" "CAST:M:vals 218 1" "CMSE:M:vals 218 1" "CONFORM:M" "CWE:M:vals 218 1" "Customer Sample:M" "DERA:M:vals 218 1" "GJB:M:vals 218 1" "HIS:M:vals 218 1" "Legacy:M:vals 218 1" "MISRA-AC:M:vals 218 1" "MISRA:M:vals 218 1" "MISRA-C:2004:M:vals 218 1" "MISRA-C:2012:C:vals 218 1" "RUNTIME:M" "Standard:M" "VSOS:M:vals 218 1" "PDTMCSFVA:030000200" "K:exp"
+# Void procedure used in expression.
+#
+  65 S M "ACME Standard:C" "CMSE:M" "CONFORM:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "Standard:M" "VSOS:O" "PDTMCSFVA:030000200" "K:fnpar"
+# Void variable passed as parameter.
+#
+  66 S M "ACME Standard:M" "CAST:M" "CMSE:M" "CONFORM:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "SEC-C:O" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000300" "K:fn"
+# Function with empty return expression.
+#
+  67 S M "CMSE:O" "Customer Sample:M" "DERA:M" "GJB:O" "HIS:M" "MISRA-AC:I" "MISRA:M" "MISRA-C:2004:M" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000300000" "K:pre"
+# #define used in a block.
+#
+  68 S O "ACME Standard:O" "CMSE:O" "DERA:O" "GJB:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:O" "SEC-C:M" "UML:O" "VSOS:M" "PDTMCSFVA:000300000" "K:pre"
+# #undef used.
+#
+  69 S C "ACME Standard:I" "CMSE:O" "DERA:C" "GJB:O" "HIS:C" "MISRA-AC:I" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:I" "NETRINO:C" "UML:C" "VSOS:C" "PDTMCSFVA:300000000" "K:pre"
+# #pragma used.
+#
+  70 S M "CAST:O" "CMSE:O" "Customer Sample:M" "DERA:M" "GJB:O" "HIS:M" "MISRA:M" "Standard:M" "UML:M" "VSOS:O" "PDTMCSFVA:030000200" "K:ptr"
+# Logical comparison of pointers.
+#
+  71 S M "ACME Standard:C:vals 222 1" "CAST:M" "CERT:M:vals 222 1" "CMSE:M" "CONFORM:M:vals 222 1" "CWE:M:vals 222 1" "Customer Sample:M" "DERA:M:vals 222 1" "GJB:M" "HIS:M:vals 222 1" "Legacy:M:vals 222 1" "MISRA-AC:M:vals 222 1" "MISRA:M:vals 222 1" "MISRA-C:2004:M:vals 222 1" "MISRA-C:2012:C:vals 222 1" "RUNTIME:M:vals 222 1" "SEC-C:O:vals 222 1" "Standard:M" "UML:M" "VSOS:M:vals 222 1" "PDTMCSFVA:030000233" "K:ptr"
+# Pointer assignment to wider scope.
+#
+  72 S M "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:M" "VSOS:M" "PDTMCSFVA:300000200" "K:struct"
+# Signed bit field less than 2 bits wide.
+#
+  73 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CONFORM:M" "CWE:M" "DERA:M" "GJB:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000200" "K:struct"
+# Bit field not signed or unsigned int.
+#
+  74 S M "ACME Standard:O" "CAST:O" "CMSE:O" "DERA:M" "GJB:O" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "SEC-C:M" "UML:M" "VSOS:O" "PDTMCSFVA:200000200" "K:type"
+# Union declared.
+#
+  75 S M "ACME Standard:O" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:O" "MISRA-C:2012:O" "NETRINO:M" "VSOS:M" "PDTMCSFVA:030000200" "K:file"
+# Executable code before an included file.
+#
+  76 S M "ACME Standard:C" "CMSE:M" "CONFORM:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000000" "K:pre"
+# More than one of # or ## in a macro.
+#
+  77 S M "CAST:M" "CERT:O" "CMSE:M" "DERA:M" "EADS:M" "FSB582-C:O" "GJB:M" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "NETRINO:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:000220210" "K:pre"
+# Macro replacement list needs parentheses.
+#
+  78 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "EADS:M" "FSB582-C:O" "GJB:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:000220210" "K:pre"
+# Macro parameter not in brackets.
+#
+  79 S M "CAST:M" "CERT:O" "CMSE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "SEC-C:M" "VSOS:M:vals 298 1" "PDTMCSFVA:000200200" "K:pre"
+# Macro contains unacceptable items.
+#
+  80 S O "ACME Standard:O" "CAST:M" "CMSE:M" "Customer Sample:O" "DERA:O" "GJB:M" "HIS:O" "JPL:M" "MISRA-AC:I" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:O" "SEC-C:O" "Standard:O" "UML:O" "VSOS:M" "PDTMCSFVA:000300000" "K:ptr"
+# Pointer indirection exceeds 2 levels.
+#
+  81 S M "ACME Standard:O" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:000200110" "K:lit"
+# Use of trigraphs.
+#
+  82 S M "DERA:M" "HIS:M" "MISRA:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000200" "K:lit"
+# Use of wide string literal.
+#
+  83 S M "ACME Standard:C" "CAST:O" "CMSE:M" "DERA:M" "GJB:O" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:000300100" "K:lit"
+# Octal number found.
+#
+  84 S O "CAST:O" "CMSE:O" "Customer Sample:O" "DERA:O" "GJB:O" "MISRA:O" "NETRINO:O" "Standard:O" "UML:O" "VSOS:M" "PDTMCSFVA:300300000" "K:obj"
+# Register variable declared.
+#
+  85 S M "CAST:M" "CERT:O" "CMSE:M" "DERA:M" "EADS:M" "GJB:M" "HIS:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000010" "K:type"
+# Incomplete initialisation of enumerator.
+#
+  86 S M "ACME Standard:C" "CAST:M" "CERT:M" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000200210" "K:pre"
+# Attempt to define reserved word.
+#
+  87 S O "ACME Standard:O" "CAST:O" "CMSE:O" "DERA:O" "GJB:O" "HIS:O" "MISRA:O" "MISRA-C:2012:O" "SEC-C:O" "Standard:O" "UML:O" "VSOS:O" "PDTMCSFVA:030000200" "K:ptr"
+# Use of pointer arithmetic.
+#
+  88 S O "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:O" "GJB:M" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:O" "SEC-C:M" "UML:O" "VSOS:O" "PDTMCSFVA:300000000" "K:fn"
+# Procedure is not pure assembler.
+#
+  89 S M "CAST:M" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "MISRA:M" "VSOS:O" "PDTMCSFVA:300000000" "K:type"
+# char type not signed or unsigned.
+#
+  90 S O "ACME Standard:O:vals 219 1" "CAST:O" "DERA:O" "EADS:M" "FSB582-C:M:219" "GJB:O" "HIS:O" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:O:vals 219 1" "NETRINO:O" "SEC-C:M" "VSOS:O" "PDTMCSFVA:200200000" "K:type"
+# Basic type declaration used.
+#
+  91 S O "CAST:M" "CMSE:M" "DERA:O" "EADS:C" "GJB:M" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:C" "SEC-C:M" "TBrun Requires:M" "UML:O" "VSOS:M" "PDTMCSFVA:000300000" "K:id" "K:namespace"
+# Name redeclared in another C name space (MR).
+#
+  92 S O "ACME Standard:C" "CAST:M" "CMSE:M" "Customer Sample:O" "DERA:O" "FSB582-C:M" "GJB:M" "Legacy:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:C" "MISRA-C:2012:C" "SEC-C:M" "Standard:O" "VSOS:M" "PDTMCSFVA:000300200" "K:type"
+# Duplicate use of a name in an enumeration.
+#
+  93 S O "ACME Standard:C:vals 191 1" "CAST:O" "CERT:M" "CMSE:M" "CONFORM:O" "CWE:M:vals 191 1" "DERA:O" "GJB:M" "HIS:O" "Legacy:M" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C:vals 191 1" "NETRINO:O" "SEC-C:M" "UML:O" "VSOS:O" "PDTMCSFVA:030000210" "K:conv"
+# Value is not of appropriate type.
+#
+  94 S M "ACME Standard:C:vals 396 1" "CERT:M:vals 396 1" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "MISRA-AC:O:vals 396 1" "MISRA:M" "MISRA-C:2004:O:vals 396 1" "MISRA-C:2012:C:vals 396 1" "SEC-C:M:vals 396 1" "Standard:M" "UML:M" "VSOS:O" "PDTMCSFVA:300000200" "K:conv" "K:ptr"
+# Casting operation on a pointer.
+#
+  95 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:O" "DERA:M" "GJB:O" "HIS:M" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M:vals 381 1" "Standard:M" "TBrun Requires:M" "UML:M" "VSOS:O" "PDTMCSFVA:300000200" "K:conv" "K:ptr"
+# Casting operation to a pointer.
+#
+  96 S M "ACME Standard:C" "CERT:O" "CMSE:O" "CWE:M" "DERA:M" "GJB:O" "HIS:M:vals 267 1" "Legacy:M" "MISRA-AC:M" "MISRA:M:vals 267 1" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000000" "K:conv"
+# Use of mixed mode arithmetic.
+#
+  97 S O "CMSE:O" "DERA:O" "GJB:O" "HIS:O" "MISRA:O" "Standard:O" "UML:O" "VSOS:O" "PDTMCSFVA:000300200" "K:conv"
+# Use of redundant cast.
+#
+  98 S M "CAST:M" "CERT:M" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000300" "K:fnpar"
+# Actual and formal parameters inconsistent (MR).
+#
+  99 S O "CAST:O" "CERT:O" "CMSE:O" "CWE:M" "Customer Sample:O" "DERA:O" "GJB:O" "HIS:O" "Legacy:O" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "SEC-C:M" "Standard:O" "VSOS:M" "PDTMCSFVA:030000210" "K:fn"
+# Function use is not a call.
+#
+ 100 S M "ACME Standard:C" "CMSE:M" "CONFORM:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000200" "K:pre" "K:file"
+# #include filename is non conformant.
+#
+ 101 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:030000200" "K:fn"
+# Function return type inconsistent.
+#
+ 102 S M "ACME Standard:C" "CAST:M" "CMSE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:030000200" "K:fn"
+# Function and prototype return inconsistent (MR).
+#
+ 103 S M "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:030000300" "K:fnpar"
+# Function and prototype param inconsistent (MR).
+#
+ 104 S M "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA:M" "MISRA-C:2012:C" "Standard:M" "VSOS:M" "PDTMCSFVA:030000200" "K:struct"
+# Struct field initialisation incorrect.
+#
+ 105 S M "ACME Standard:C" "CAST:M" "CMSE:M" "CONFORM:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:I" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000000" "K:struct"
+# Initialisation brace { } fault.
+#
+ 106 S C "UML:C" "VSOS:M" "PDTMCSFVA:000300200" "K:obj"
+# Volatile declaration.
+#
+ 107 S M "ACME Standard:C" "CERT:O" "CMSE:O" "CWE:M" "DERA:M" "GJB:O" "HIS:O" "Legacy:M" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "Standard:M" "PDTMCSFVA:030000200" "K:conv"
+# Type mismatch in ternary expression.
+#
+# 108 S M "Customer Sample:M" "Legacy:M" "Standard:M" "PDTMCSFVA:030000200" "K:conv"
+# Assignment types do not match.
+#
+ 109 S M "CAST:M" "CMSE:M" "Customer Sample:M" "DERA:M" "GJB:M" "Legacy:M" "Standard:M" "PDTMCSFVA:030000000" "K:arr"
+# Array subscript is not integral.
+#
+ 110 S M "ACME Standard:O" "CMSE:O" "DERA:M" "FSB582-C:M" "GJB:O" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "SEC-C:O" "VSOS:M" "PDTMCSFVA:200000200" "K:file"
+# Use of single line comment //.
+#
+ 111 S O "DERA:O" "HIS:O" "MISRA:O" "UML:O" "VSOS:O" "PDTMCSFVA:000020100" "K:switch"
+# Label is not part of switch statement (MR).
+#
+ 112 S M "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:000200200" "K:id"
+# Typedef name redeclared.
+#
+ 113 S M "ACME Standard:C" "CERT:O" "CMSE:O" "CWE:M" "DERA:M" "FSB582-C:M" "GJB:O" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000110" "K:lit"
+# Non standard character   in source.
+#
+ 114 S M "ACME Standard:C" "CAST:O" "CMSE:M" "DERA:M" "FSB582-C:O" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:000012200" "K:exp"
+# Expression is not Boolean.
+#
+ 115 S M "CERT:O" "CMSE:M" "GJB:M" "Legacy:M" "PDTMCSFVA:020002010" "K:lit" "K:exp"
+# String incorrectly terminated.
+#
+ 116 S M "DERA:M" "Legacy:M" "SEC-C:M" "VSOS:O" "PDTMCSFVA:000003000" "K:if"
+# Boolean comparison with 0 preferred.
+#
+ 117 S M "CAST:M" "CMSE:M" "Customer Sample:M" "GJB:M" "Legacy:M" "Standard:M" "PDTMCSFVA:000003000" "K:exp"
+# Logical negation of constant value.
+#
+ 118 S M "ACME Standard:C" "CMSE:M" "DERA:M" "GJB:M" "Legacy:M" "MISRA-C:2012:C" "PDTMCSFVA:000220200" "K:fn"
+# main must be int (void) or int (int,char*[]).
+#
+ 119 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000200120" "K:file"
+# Nested comment found.
+#
+ 120 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "RUNTIME:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000000" "K:exp"
+# Use of bit operator on signed type.
+#
+ 121 S O "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:O" "GJB:M" "HIS:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:O" "VSOS:O" "PDTMCSFVA:000030200" "K:switch"
+# Use of boolean expression in switch.
+#
+ 122 S M "ACME Standard:C" "CMSE:O" "DERA:M" "GJB:O" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "VSOS:M" "PDTMCSFVA:300000200" "K:jmp" "K:lib"
+# Use of abort, exit, etc.
+#
+ 123 S M "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:M" "GJB:M" "Legacy:O" "MISRA-C:2012:C" "PDTMCSFVA:030000100" "K:type" "K:exp"
+# Use of underlying enum representation value.
+#
+ 124 S M "DERA:M" "VSOS:M" "PDTMCSFVA:030000000" "K:exp"
+# Use of prefix ++ or --.
+#
+ 125 S M "ACME Standard:C" "CERT:O" "CMSE:O" "DERA:M" "GJB:O" "MISRA-AC:O" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000000" "K:pre"
+# Use of ## or # in a macro.
+#
+ 126 S M "ACME Standard:C" "CAST:M" "CMSE:M" "Customer Sample:M" "DERA:M" "GJB:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "Standard:M" "UML:M" "PDTMCSFVA:000300200" "K:pre"
+# A #if has no #endif in the same file.
+#
+ 127 S M "ACME Standard:C:vals 286 1" "CAST:M" "CERT:O" "CMSE:M" "CONFORM:M" "CWE:M:vals 286 1" "DERA:M:vals 285 1" "GJB:M:vals 286 1" "Legacy:O:vals 286 1" "MISRA-AC:M:vals 286 1" "MISRA-C:2004:M:vals 286 1" "MISRA-C:2012:C:vals 286 1" "SEC-C:M:vals 286 1:vals 191 1" "VSOS:M:vals 285 1" "PDTMCSFVA:030000100" "K:arr"
+# Array has no bounds specified.
+#
+ 128 S O "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:O" "FSB582-C:M" "GJB:M" "HIS:C" "Legacy:I" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "Standard:O" "VSOS:M" "PDTMCSFVA:000300100" "K:fnpar" "K:id"
+# Parameter has same name as global variable.
+#
+ 129 S O "CAST:M" "CMSE:M" "DERA:O" "GJB:M" "MISRA-AC:I" "MISRA:O" "MISRA-C:2004:O" "VSOS:M" "PDTMCSFVA:000300200" "K:fnpar" "K:id"
+# Parameter has same name as type or tag.
+#
+ 130 S M "ACME Standard:C" "DERA:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "VSOS:M" "PDTMCSFVA:300000000" "K:file"
+# Included file is not permitted.
+#
+ 131 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "JPL:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:000300110" "K:obj" "K:id"
+# Name reused in inner scope.
+#
+ 132 S M "ACME Standard:C:vals 247 1" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C:vals 247 1" "NETRINO:M" "SEC-C:O" "UML:M" "VSOS:M" "PDTMCSFVA:030000110" "K:exp"
+# Assignment operator in boolean expression.
+#
+ 133 S M "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:I" "MISRA:M" "RUNTIME:C" "UML:M" "VSOS:M" "PDTMCSFVA:030000200" "K:exp"
+# Assignment operator in RHS of && or ||.
+#
+ 134 S C "ACME Standard:C" "CERT:M" "CMSE:M" "CONFORM:C" "CWE:M" "DERA:C" "FSB582-C:O" "GJB:M" "HIS:C" "MISRA-AC:C" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "RUNTIME:C" "SEC-C:M" "UML:C" "VSOS:M" "PDTMCSFVA:030000100" "K:exp"
+# Volatile variable in complex expression.
+#
+ 135 S M "ACME Standard:C" "CERT:O" "CMSE:O" "CWE:M" "FSB582-C:M" "GJB:O" "Legacy:I" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:300000210" "K:fnpar"
+# Parameter list is KR.
+#
+ 136 S O "ACME Standard:C" "CAST:M" "CMSE:M" "CWE:M" "Customer Sample:O" "DERA:O" "GJB:M" "HIS:O" "Legacy:M" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:C" "Standard:O" "VSOS:O" "PDTMCSFVA:000010200" "K:exp"
+# Bit operator with boolean operand.
+#
+ 137 S O "CMSE:M" "CWE:M" "DERA:O" "GJB:M" "HIS:O" "Legacy:M" "MISRA:O" "VSOS:O" "PDTMCSFVA:000010200" "K:exp"
+# Bit operator acting on boolean value.
+#
+ 138 S M "CAST:O" "CMSE:O" "DERA:M" "GJB:O" "HIS:M" "MISRA:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000000" "K:struct"
+# Anonymous bit field used in structure.
+#
+ 139 S C "ACME Standard:C" "CERT:O" "CMSE:O" "CWE:M" "Customer Sample:C" "DERA:C" "GJB:O" "HIS:C" "Legacy:M" "MISRA-AC:C" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "RUNTIME:C" "SEC-C:O" "Standard:C" "VSOS:M" "PDTMCSFVA:000030210" "K:flow"
+# Construct leads to infeasible code.
+#
+ 140 S C "ACME Standard:C" "CERT:O" "CMSE:O" "CWE:M" "Customer Sample:C" "DERA:C" "GJB:O" "HIS:C" "Legacy:M" "MISRA-AC:M" "MISRA:C" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:C" "SEC-C:M" "Standard:C" "VSOS:M" "PDTMCSFVA:000030210" "K:flow" "K:loop"
+# Infeasible loop condition found.
+#
+ 141 S M "CAST:M" "CMSE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA:M" "Standard:M" "VSOS:M" "PDTMCSFVA:030000200" "K:struct"
+# Incomplete structure or class declaration.
+#
+ 142 S M "CMSE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:I" "MISRA:M" "Standard:M" "VSOS:M" "PDTMCSFVA:030000200" "K:fnpar"
+# Parameter list declarations are inconsistent.
+#
+ 143 S M "ACME Standard:O" "CONFORM:M" "FSB582-C:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:200200100" "K:exp"
+# Curly brackets used in expression.
+#
+ 144 S M "DERA:M" "NETRINO:M" "PDTMCSFVA:030000200" "K:type"
+# Floating point not permitted.
+#
+ 145 S M "ACME Standard:C" "CONFORM:M" "Customer Sample:M" "FSB582-C:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "Standard:M" "PDTMCSFVA:300000000" "K:pre"
+# #if has invalid expression.
+#
+ 146 S M "Customer Sample:M" "Legacy:M" "Standard:M" "PDTMCSFVA:000003200" "K:pre"
+# #define with empty parameter list.
+#
+ 147 S M "ACME Standard:C" "Customer Sample:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "Standard:M" "UML:M" "PDTMCSFVA:030000200" "K:pre"
+# Spurious characters after preprocessor directive.
+#
+ 148 S M "CWE:M" "Customer Sample:M" "DERA:M" "EADS:M" "FSB582-C:M" "HIS:M" "Legacy:M" "MISRA:M" "Standard:M" "VSOS:M" "PDTMCSFVA:200000200" "K:fn"
+# No return type for function/procedure.
+#
+ 149 S M "ACME Standard:O" "Customer Sample:M" "Legacy:M" "MISRA-C:2012:O" "Standard:M" "PDTMCSFVA:001300200" "K:fnpar"
+# Reference parameter to procedure is reassigned.
+#
+ 150 S M "DERA:M" "PDTMCSFVA:030000100" "K:type"
+# Volatile or const used in function type.
+#
+ 151 S M "DERA:M" "PDTMCSFVA:000300000" "K:pre"
+# Use of global variable in macro definition.
+#
+ 152 S M "DERA:M" "PDTMCSFVA:000003000" "K:pre" "K:file"
+# Use of a comment in a macro definition.
+#
+ 153 S M "DERA:M" "PDTMCSFVA:000003000" "K:pre" "K:file"
+# Use of a comment in a pre-processor directive.
+#
+ 154 S M "DERA:M" "NETRINO:M" "PDTMCSFVA:000300000" "K:file"
+# Nested header files found.
+#
+ 155 S M "DERA:M" "PDTMCSFVA:000003200" "K:pre" "K:file"
+# Comments between preprocessor directives.
+#
+ 156 S M "ACME Standard:C" "DERA:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:030000200" "K:pre"
+# Use of 'defined' keyword in macro body.
+#
+ 157 S M "ACME Standard:C" "CAST:M" "CERT:M" "CONFORM:M" "CWE:M" "DERA:M" "GJB:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000010" "K:lit"
+# Modification of string literal.
+#
+ 158 S M "DERA:M" "PDTMCSFVA:001130000" "K:exp"
+# Expression with more than *** subconditions.
+#
+ 159 S M "DERA:M" "PDTMCSFVA:300000300" "K:ptr"
+# Comparing pointer with zero or NULL.
+#
+# 160 S O "Legacy:O" "PDTMCSFVA:000000000" "K:pre"
+# Loop in macro expansion.
+#
+# 161 S
+# Not used for 'c'.
+#
+# 162 S
+# Not used for 'c'.
+#
+ 163 S O "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Function starts with upper case character.
+#
+ 164 S M "PDTMCSFVA:000300000" "K:ptr"
+# Use of void * pointer.
+#
+# 165 S
+# Not used for 'c'.
+#
+# 166 S
+# Not used for 'c'.
+#
+# 167 S
+# Not used for 'c'.
+#
+ 168 S M "NETRINO:M" "PDTMCSFVA:000300200" "K:fnpar"
+# Call by value parameter not const.
+#
+# 169 S
+# Not used for 'c'.
+#
+ 170 S M "CERT:M" "CWE:M" "Legacy:M" "VSOS:O" "PDTMCSFVA:030000210" "K:fn"
+# Procedure call has no prototype and no defn.
+#
+# 171 S
+# Not used for 'c'.
+#
+ 172 S M "ACME Standard:C" "HIS:M" "Legacy:I:vals 297 1" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000100" "K:obj"
+# Variable declared multiply.
+#
+# 173 S
+# Not used for 'c'.
+#
+# 174 S
+# Not used for 'c'.
+#
+ 175 S C "PDTMCSFVA:000003000" "K:style"
+# Function starts with lower case character.
+#
+ 176 S O "ACME Standard:C" "CERT:O" "CONFORM:O" "CWE:M" "DERA:M" "FSB582-C:M" "HIS:O" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "VSOS:M" "PDTMCSFVA:100000020" "K:lit"
+# Non standard escape sequence    in source.
+#
+ 177 S M "CERT:O" "EADS:M" "JPL:M" "VSOS:M" "PDTMCSFVA:000003010" "K:style"
+# Identifier not declared on new line.
+#
+ 178 S O "EADS:M" "FSB582-C:M" "JPL:M" "VSOS:M" "PDTMCSFVA:000003000" "K:style"
+# Declaration statement not on new line.
+#
+ 179 S O "CAST:M" "PDTMCSFVA:000003000" "K:style"
+# Extern not at start of header file.
+#
+ 180 S C "NETRINO:C" "PDTMCSFVA:000003000" "K:style"
+# No space between * or & and name in declaration.
+#
+ 181 S O "EADS:M" "NETRINO:O" "PDTMCSFVA:000003000" "K:style"
+# No space between if, while, for and expresn.
+#
+ 182 S O "EADS:M" "NETRINO:O" "PDTMCSFVA:000003000" "K:style"
+# No space after semi colon in for expression.
+#
+ 183 S C "FSB582-C:O" "NETRINO:C" "PDTMCSFVA:000003000" "K:style"
+# No newline after semi colon.
+#
+ 184 S C "FSB582-C:O:vals 240 1" "NETRINO:C" "PDTMCSFVA:000003000" "K:style"
+# Spaces round -> or [] operators.
+#
+ 185 S O "EADS:M" "FSB582-C:O" "NETRINO:O" "Standard:O" "PDTMCSFVA:000003000" "K:style"
+# Space between unary operator and operand.
+#
+ 186 S O "EADS:M" "FSB582-C:O" "NETRINO:O" "PDTMCSFVA:000003000" "K:style"
+# Space missing before or after binary operator.
+#
+ 187 S O "ACME Standard" "EADS:M" "FSB582-C:M" "NETRINO:O" "VSOS:M" "PDTMCSFVA:000003000" "K:style"
+# Tab character in source.
+#
+ 188 S C "EADS:M" "FSB582-C:M" "NETRINO:C" "VSOS:M" "PDTMCSFVA:000003000" "K:style"
+# { or } not on line by itself.
+#
+ 189 S C "EADS:M:vals 177 132" "FSB582-C:M:vals 177 120" "NETRINO:C" "UML:C" "PDTMCSFVA:000003000" "K:style"
+# Input line exceeds limit.
+#
+ 190 S C "ACME Standard:C:2" "EADS:M:vals 324 1" "FSB582-C:M:3" "NETRINO:C" "PDTMCSFVA:000003000" "K:style"
+# { ... } contents not indented by *** spaces.
+#
+ 191 S O "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Space between function name and parenthesis.
+#
+ 192 S O "PDTMCSFVA:000003000" "K:style"
+# Static not on separate line in function defn.
+#
+# 193 S
+# Not used for 'c'.
+#
+# 194 S
+# Not used for 'c'.
+#
+ 195 S O "JPL:M" "PDTMCSFVA:000003000" "K:style"
+# Function return type needs a new line.
+#
+# 196 S
+# Not used for 'c'.
+#
+# 197 S
+# Not used for 'c'.
+#
+# 198 S
+# Not used for 'c'.
+#
+# 199 S
+# Not used for 'c'.
+#
+ 200 S C "CERT:O" "EADS:M" "NETRINO:C" "UML:C" "PDTMCSFVA:001202010" "K:pre" "K:lit"
+# Define used for numeric constant.
+#
+ 201 S C "CERT:O" "CWE:O:vals 217 1" "EADS:C" "NETRINO:C" "SEC-C:O" "UML:O:vals 217 1" "VSOS:O:vals 163 1" "PDTMCSFVA:000303110" "K:lit" "K:exp"
+# Use of numeric literal in expression.
+#
+# 202 S
+# Not used for 'c'.
+#
+ 203 S O "ACME Standard:C:vals 390 1" "CERT:O" "CWE:M" "Legacy:O:vals 390 1" "MISRA-AC:M:vals 390 1" "MISRA-C:2004:M:vals 390 1" "MISRA-C:2012:C:vals 390 1" "SEC-C:M:vals 390 1" "PDTMCSFVA:030000110" "K:conv"
+# Cast on a constant value.
+#
+ 204 S O "PDTMCSFVA:000310000" "K:jmp" "K:style"
+# continue or goto not defined to rubbish.
+#
+# 205 S
+# Not used for 'c'.
+#
+# 206 S
+# Not used for 'c'.
+#
+# 207 S
+# Not used for 'c'.
+#
+# 208 S
+# Not used for 'c'.
+#
+ 209 S O "NETRINO:O" "PDTMCSFVA:000003000" "K:pre" "K:style"
+# Preprocessor command indented.
+#
+ 210 S O "EADS:M" "FSB582-C:M" "NETRINO:O" "VSOS:M" "PDTMCSFVA:000003000" "K:pre" "K:style"
+# Macro name is not upper case.
+#
+# 211 S
+# Not used for 'c'.
+#
+# 212 S
+# Not used for 'c'.
+#
+# 213 S
+# Not used for 'c'.
+#
+# 214 S
+# Not used for 'c'.
+#
+ 215 S O "Legacy:I" "SEC-C:O" "PDTMCSFVA:000020100" "K:struct" "K:fnpar"
+# Struct or class called by value.
+#
+ 216 S O "EADS:M" "VSOS:O" "PDTMCSFVA:000003000" "K:style"
+# Pointer name does not have required suffix.
+#
+ 217 S O "ACME Standard:O" "EADS:C" "FSB582-C:M" "MISRA-C:2012:O" "Standard:O" "VSOS:M" "PDTMCSFVA:000003100" "K:id"
+# Names only differ by case.
+#
+ 218 S O "ACME Standard:C" "CERT:O" "EADS:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:O" "SEC-C:M" "UML:O" "PDTMCSFVA:000301010" "K:id" "K:lib"
+# Name is used in standard libraries.
+#
+ 219 S C "EADS:M" "FSB582-C:M" "NETRINO:C" "SEC-C:M" "UML:C" "PDTMCSFVA:000003000" "K:style"
+# User name starts with underscore.
+#
+ 220 S O "PDTMCSFVA:000003000" "K:style"
+# No prefix for global type.
+#
+ 221 S C "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Start of class/struct/union/enum lower case.
+#
+ 222 S O "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Start of variable is upper case.
+#
+ 223 S O "PDTMCSFVA:000003000" "K:style"
+# No prefix for global function.
+#
+ 224 S M "PDTMCSFVA:000003000" "K:style"
+# Start of enumeration is upper case.
+#
+ 225 S O "PDTMCSFVA:000003000" "K:style" "K:file"
+# Inappropriate file extension.
+#
+ 226 S O "SEC-C:M" "UML:O" "PDTMCSFVA:200200000" "K:lit" "K:struct"
+# Bit field is not octal, hex or suffix u.
+#
+ 227 S O "PDTMCSFVA:200200200" "K:lit" "K:struct"
+# Numeric bit operand is not octal,hex or u.
+#
+ 228 S O "PDTMCSFVA:000301200" "K:pre"
+# Bracket mismatch ( or { in macro definition.
+#
+ 229 S O "PDTMCSFVA:000301200" "K:pre"
+# Bracket mismatch ) or } in macro definition.
+#
+# 230 S
+# Not used for 'c'.
+#
+# 231 S
+# Not used for 'c'.
+#
+# 232 S
+# Not used for 'c'.
+#
+# 233 S
+# Not used for 'c'.
+#
+# 234 S
+# Not used for 'c'.
+#
+# 235 S
+# Not used for 'c'.
+#
+# 236 S
+# Not used for 'c'.
+#
+# 237 S
+# Not used for 'c'.
+#
+# 238 S
+# Not used for 'c'.
+#
+# 239 S
+# Not used for 'c'.
+#
+# 240 S
+# Not used for 'c'.
+#
+# 241 S
+# Not used for 'c'.
+#
+# 242 S
+# Not used for 'c'.
+#
+ 243 S C "ACME Standard:C" "CERT:O" "CWE:M" "EADS:M" "FSB582-C:M" "Legacy:O" "MISRA-AC:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "NETRINO:C" "SEC-C:M" "Standard:C" "UML:C" "VSOS:M" "PDTMCSFVA:000200210" "K:pre" "K:file"
+# Included file not protected with #define.
+#
+# 244 S
+# Not used for 'c'.
+#
+ 245 S M "ACME Standard:C" "FSB582-C:O" "Legacy:O" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:000220100" "K:switch"
+# Case statement in nested block.
+#
+# 246 S
+# Not used for 'c'.
+#
+# 247 S M "JPL:M" "Legacy:M" "PDTMCSFVA:000220300" "K:pre"
+# Macro definition calls itself.
+#
+ 248 S M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000110" "K:pre"
+# Divide by zero in preprocessor directive.
+#
+# 249 S M "ACME Standard:C" "Legacy:M" "MISRA-C:2012:C" "PDTMCSFVA:030000200" "K:exp"
+# Operation not appropriate to boolean type.
+#
+ 250 S M "Legacy:M" "PDTMCSFVA:030000000" "K:file"
+# Cyclic included file nesting found.
+#
+# 251 S
+# Not used for 'c'.
+#
+ 252 S M "ACME Standard:C" "MISRA-C:2012:C" "SEC-C:O" "PDTMCSFVA:000103000" "K:lit" "K:style"
+# Lower case suffix to literal number.
+#
+# 253 S
+# Not used for 'c'.
+#
+# 254 S
+# Not used for 'c'.
+#
+ 255 S M "FSB582-C:M" "PDTMCSFVA:000103000" "K:pre"
+# Found #if, #ifdef, #else, #elif .
+#
+ 256 S C "EADS:C" "FSB582-C:O:100" "JPL:M" "NETRINO:C" "PDTMCSFVA:000212000" "K:style"
+# Procedure exceeds *** source lines of code.
+#
+ 257 S M "PDTMCSFVA:300000000" "K:file"
+# Filename in #include not in < > .
+#
+# 258 S
+# Not used for 'c'.
+#
+# 259 S C "FSB582-C:O" "JPL:M" "PDTMCSFVA:000113200" "K:style"
+# Statement not on new line (added by Testbed).
+#
+# 260 S
+# Not used for 'c'.
+#
+# 261 S
+# Not used for 'c'.
+#
+# 262 S
+# Not used for 'c'.
+#
+# 263 S
+# Not used for 'c'.
+#
+# 264 S
+# Not used for 'c'.
+#
+# 265 S
+# Not used for 'c'.
+#
+# 266 S
+# Not used for 'c'.
+#
+ 267 S C "PDTMCSFVA:000003000" "K:lit" "K:style"
+# Hexadecimal number with lower case char.
+#
+ 268 S C "EADS:M" "Standard:C" "UML:C" "PDTMCSFVA:000003000" "K:loop"
+# Empty initialisation exprsn in for loop.
+#
+ 269 S C "EADS:M" "HIS:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:M" "SEC-C:M" "Standard:C" "UML:C" "PDTMCSFVA:000003000" "K:loop"
+# Empty increment exprsn in for loop.
+#
+ 270 S C "ACME Standard:C" "HIS:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:C" "MISRA-C:2012:C" "SEC-C:M" "Standard:C" "UML:C:vals 249 1" "PDTMCSFVA:000112000" "K:loop"
+# For loop initialisation is not simple.
+#
+ 271 S C "ACME Standard:C" "HIS:O" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:C" "MISRA-C:2012:C" "SEC-C:M" "Standard:C" "UML:C" "PDTMCSFVA:000112000" "K:loop"
+# For loop incrementation is not simple.
+#
+ 272 S M "FSB582-C:O" "PDTMCSFVA:000300000" "K:pre"
+# Found #ifndef (ref. removed).
+#
+ 273 S M "CERT:O" "PDTMCSFVA:000300110" "K:pre"
+# Found #define.
+#
+ 274 S M "CMSE:M" "EADS:M" "FSB582-C:O" "GJB:M" "NETRINO:M" "UML:M:2" "PDTMCSFVA:000300100" "K:style"
+# Name found with length less than ***.
+#
+ 275 S M "PDTMCSFVA:000300000" "K:struct"
+# Tag missing in struct, union or enum.
+#
+ 276 S O "ACME Standard:C" "GJB:M" "Legacy:O" "MISRA-C:2012:C" "PDTMCSFVA:000300000" "K:switch"
+# Case is not part of switch enumeration.
+#
+ 277 S M "PDTMCSFVA:000300100" "K:switch"
+# Switch chooser is not an enumeration.
+#
+ 278 S M "CAST:O" "CMSE:M" "GJB:M" "Legacy:M:vals 233 1" "UML:M" "PDTMCSFVA:000300100" "K:switch"
+# Switch has missing or extra cases.
+#
+# 279 S
+# Not used for 'c'.
+#
+# 280 S
+# Not used for 'c'.
+#
+# 281 S
+# Not used for 'c'.
+#
+# 282 S
+# Not used for 'c'.
+#
+# 283 S
+# Not used for 'c'.
+#
+ 284 S M "PDTMCSFVA:000210000" "K:conv"
+# Cast preceded by a cast.
+#
+# 285 S
+# Not used for 'c'.
+#
+ 286 S M "FSB582-C:M" "MISRA-AC:M" "MISRA-C:2004:M" "NETRINO:M" "SEC-C:M" "Standard:M" "UML:M" "PDTMCSFVA:000300100" "K:file"
+# Functions defined in header file.
+#
+ 287 S C "FSB582-C:M" "Legacy:O:vals 250 1" "MISRA-AC:C" "MISRA-C:2004:C" "NETRINO:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:file"
+# Variable definitions in header file.
+#
+ 288 S C "EADS:M" "FSB582-C:M:vals 301 1" "NETRINO:C" "Standard:C" "UML:C" "PDTMCSFVA:000003000" "K:file"
+# Header file is not .h.
+#
+# 289 S
+# Not used for 'c'.
+#
+# 290 S
+# Not used for 'c'.
+#
+# 291 S
+# Not used for 'c'.
+#
+ 292 S M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:M" "PDTMCSFVA:000003000" "K:style"
+# No space between #include and filename.
+#
+ 293 S M "ACME Standard:O" "CONFORM:M" "EADS:M" "FSB582-C:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "NETRINO:M" "SEC-C:O" "UML:M" "PDTMCSFVA:300000000" "K:misc"
+# Non ANSI/ISO construct used.
+#
+# 294 S
+# Not used for 'c'.
+#
+ 295 S C "UML:C" "PDTMCSFVA:000300200" "K:lit"
+# Use of digraph.
+#
+ 296 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "HIS:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:300200000" "K:fn"
+# Function declared at block scope.
+#
+# 297 S
+# Not used for 'c'.
+#
+ 298 S M "Legacy:I" "NETRINO:M" "UML:M" "PDTMCSFVA:301000000" "K:fn" "K:ptr"
+# Non const pointer to function.
+#
+ 299 S C "CERT:O" "UML:C" "PDTMCSFVA:000300010" "K:ptr" "K:fn"
+# Pointer to function declared without typedef.
+#
+# 300 S
+# Not used for 'c'.
+#
+ 301 S C "EADS:M" "FSB582-C:M" "NETRINO:C" "PDTMCSFVA:000003100" "K:style"
+# } not aligned vertically below {.
+#
+ 302 S M "ACME Standard:O" "CERT:O" "CMSE:M" "DERA:M" "EADS:M" "GJB:M" "HIS:M" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:O" "NETRINO:M" "SEC-C:M" "UML:M" "PDTMCSFVA:000300120" "K:file"
+# Comment possibly contains code.
+#
+# 303 S
+# Not used for 'c'.
+#
+ 304 S M "CAST:O" "CMSE:M" "GJB:M" "PDTMCSFVA:030000000" "K:conv"
+# Arithmetic performed on unsigned values.
+#
+ 305 S M "Legacy:M" "PDTMCSFVA:000100100" "K:misc"
+# Unused inspect annotation for standard ...
+#
+# 306 S
+# Not used for 'c'.
+#
+ 307 S M "JPL:M" "SEC-C:O" "PDTMCSFVA:000300000" "K:pre"
+# Use of #line, #error preprocessor directives.
+#
+# 308 S
+# Not used for 'c'.
+#
+ 309 S M "UML:O" "PDTMCSFVA:000003100" "K:style"
+# Asterisk or ampersand not attached to type.
+#
+# 310 S
+# Not used for 'c'.
+#
+# 311 S
+# Not used for 'c'.
+#
+ 312 S O "NETRINO:O" "PDTMCSFVA:000003000" "K:style"
+# Function name is not all lower case.
+#
+ 313 S O "PDTMCSFVA:000003000" "K:style"
+# Variable name is not all lower case.
+#
+ 314 S M "Standard:M" "UML:M" "PDTMCSFVA:000202000" "K:switch"
+# Switch has only 1 case and default.
+#
+ 315 S O "EADS:M" "FSB582-C:O" "NETRINO:O" "Standard:O" "UML:O" "PDTMCSFVA:000103000" "K:style"
+# Blank before/after . operator.
+#
+ 316 S M "NETRINO:M" "UML:M" "PDTMCSFVA:300000000" "K:struct"
+# Bit field is not unsigned integral.
+#
+ 317 S C "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Typedef name starts with lower case letter.
+#
+ 318 S C "PDTMCSFVA:000003100" "K:style"
+# Name letters after first not lower case.
+#
+# 319 S
+# Not used for 'c'.
+#
+# 320 S
+# Not used for 'c'.
+#
+# 321 S
+# Not used for 'c'.
+#
+ 322 S M "ACME Standard:C:vals 391 1" "EADS:M" "FSB582-C:M" "MISRA-C:2004:M" "MISRA-C:2012:C:vals 391 1" "SEC-C:M" "Standard:M" "UML:M" "PDTMCSFVA:000300000" "K:switch"
+# Default is not last case of switch.
+#
+ 323 S M "EADS:M" "Legacy:M" "Standard:M" "PDTMCSFVA:001300300" "K:switch"
+# Switch has more than one default case.
+#
+ 324 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "UML:M" "PDTMCSFVA:300000000" "K:pre"
+# Macro call has wrong number of parameters.
+#
+ 325 S M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:300000200" "K:struct"
+# Inconsistent use of tag.
+#
+ 326 S M "ACME Standard:C" "CERT:M" "CWE:M" "FSB582-C:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:M" "PDTMCSFVA:000201000" "K:fn"
+# Declaration is missing type.
+#
+ 327 S O "MISRA-AC:I" "MISRA-C:2004:O" "UML:O" "PDTMCSFVA:000300000" "K:struct" "K:id"
+# Reuse of struct or class member name.
+#
+ 328 S M "UML:M" "PDTMCSFVA:300000000" "K:struct"
+# Non bit field member in bitfield struct.
+#
+ 329 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000220" "K:conv"
+# Operation not appropriate to plain char.
+#
+ 330 S M "ACME Standard:C" "CWE:M:vals 191 1" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:220000000" "K:conv"
+# Implicit conversion of underlying type.
+#
+ 331 S M "ACME Standard:C" "CERT:O" "CWE:M:vals 358 1" "DERA:O" "HIS:M" "Legacy:I:vals 358 1" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:M" "VSOS:M" "PDTMCSFVA:000003100" "K:lit" "K:conv"
+# Literal value requires a U suffix.
+#
+ 332 S M "ACME Standard:C" "CERT:O" "CWE:M" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:200000100" "K:conv"
+# Widening cast on complex integer expression.
+#
+ 333 S M "ACME Standard:C" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:200000100" "K:conv"
+# Widening cast on complex float expression.
+#
+ 334 S M "CERT:O" "CWE:M:vals 191 1" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "SEC-C:M" "UML:M" "PDTMCSFVA:200000200" "K:conv"
+# No cast when ~ or << applied to small types.
+#
+ 335 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:200000200" "K:pre"
+# Operator defined contains illegal items.
+#
+ 336 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:200000100" "K:pre"
+# #if expansion contains define operator.
+#
+ 337 S M "ACME Standard:C" "HIS:O" "Legacy:O" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:M" "PDTMCSFVA:030000000" "K:pre"
+# Undefined macro variable in #if.
+#
+ 338 S M "ACME Standard:O" "FSB582-C:M" "MISRA-AC:O" "MISRA-C:2004:O" "MISRA-C:2012:O" "NETRINO:M" "PDTMCSFVA:000003200" "K:pre" "K:file"
+# #include preceded by non preproc directives.
+#
+ 339 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:M" "PDTMCSFVA:300000100" "K:pre"
+# #include directive with illegal items.
+#
+ 340 S M "ACME Standard:O" "CERT:O" "HIS:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:O" "NETRINO:M" "SEC-C:O" "UML:M" "PDTMCSFVA:002001010" "K:pre"
+# Use of function like macro.
+#
+ 341 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "HIS:M" "JPL:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:300000200" "K:pre"
+# Preprocessor construct as macro parameter.
+#
+ 342 S M "ACME Standard:C" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:030000000" "K:pre"
+# Extra chars after preprocessor directive.
+#
+ 343 S M "ACME Standard:C" "JPL:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:000202200" "K:pre"
+# #else has no #if, etc in the same file.
+#
+ 344 S M "ACME Standard:C:vals 395 1" "CERT:M" "CWE:M" "Legacy:M:vals 395 1" "MISRA-AC:M:vals 395 1" "MISRA-C:2004:M:vals 395 1" "MISRA-C:2012:C:vals 395 1" "SEC-C:M:vals 395 1" "UML:M" "PDTMCSFVA:300000000" "K:conv"
+# Cast on volatile value.
+#
+ 345 S M "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "RUNTIME:M" "UML:M" "PDTMCSFVA:300000000" "K:exp"
+# Bit operator with floating point operand.
+#
+ 346 S M "UML:M" "PDTMCSFVA:300000000" "K:struct"
+# Bit field is not unsigned integral or enum type.
+#
+ 347 S M "Legacy:M" "UML:M" "PDTMCSFVA:000003000" "K:pre"
+# Macro parameter list has leading space.
+#
+ 348 S M "PDTMCSFVA:300000100" "K:pre" "K:ptr"
+# Use of the NULL macro.
+#
+ 349 S M "PDTMCSFVA:000003100" "K:style"
+# Enumeration is not all lower case.
+#
+ 350 S M "PDTMCSFVA:000003000" "K:style"
+# Const variable is not all lower case.
+#
+ 351 S C "UML:C" "PDTMCSFVA:000003000" "K:type"
+# Type declaration with variable definition.
+#
+ 352 S M "CERT:O" "UML:M" "PDTMCSFVA:000201010" "K:file"
+# Declaration of type not in header file.
+#
+# 353 S
+# Not used for 'c'.
+#
+ 354 S C "EADS:M" "Legacy:I" "UML:C" "PDTMCSFVA:000300000" "K:file"
+# Extern declaration is not in header file.
+#
+ 355 S C "CERT:M" "EADS:M" "Legacy:M" "Standard:C" "UML:C" "PDTMCSFVA:300000110" "K:id"
+# Variables not unique within *** characters.
+#
+ 356 S O "JPL:M" "UML:O" "PDTMCSFVA:001100000" "K:ptr"
+# Pointer to pointer declared.
+#
+# 357 S
+# Not used for 'c'.
+#
+# 358 S
+# Not used for 'c'.
+#
+# 359 S
+# Not used for 'c'.
+#
+ 360 S M "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "UML:M" "PDTMCSFVA:300000100" "K:conv"
+# Incompatible type.
+#
+ 361 S M "ACME Standard:C" "CERT:O" "CWE:M:vals 264 1" "DERA:O" "EADS:M" "GJB:M" "HIS:M" "Legacy:I" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:O:vals 264 1" "UML:M" "PDTMCSFVA:000002210" "K:exp"
+# Expression needs brackets.
+#
+# 362 S
+# Not used for 'c'.
+#
+# 363 S
+# Not used for 'c'.
+#
+# 364 S
+# Not used for 'c'.
+#
+ 365 S M "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Hexadecimal number with upper case char.
+#
+ 366 S M "EADS:M" "SEC-C:O" "PDTMCSFVA:200200000" "K:lit"
+# String continuation - use of \.
+#
+ 367 S M "EADS:M" "PDTMCSFVA:200200000" "K:pre"
+# Macro continuation - use of \.
+#
+ 368 S M "EADS:M" "PDTMCSFVA:200200000" "K:pre"
+# Pragma continuation - use of \.
+#
+ 369 S C "EADS:C" "NETRINO:C" "PDTMCSFVA:000030100" "K:style"
+# Name found with length greater than ***.
+#
+ 370 S C "EADS:C" "FSB582-C:O:4" "NETRINO:C" "PDTMCSFVA:000030000" "K:style"
+# If nest depth greater than ***.
+#
+ 371 S M "EADS:M" "NETRINO:M" "PDTMCSFVA:000003000" "K:style"
+# No space after comma in parameter list.
+#
+ 372 S M "EADS:M" "FSB582-C:O" "PDTMCSFVA:000003000" "K:style"
+# Asterisk/ampersand not attached to name.
+#
+ 373 S M "HIS:M" "MISRA-AC:I" "MISRA:O" "MISRA-C:2004:O" "UML:M" "PDTMCSFVA:300000000" "K:exp"
+# Use of integer division.
+#
+ 374 S M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:300000100" "K:id" "K:type"
+# Name conflict with typedef.
+#
+# 375 S
+# Not used for 'c'.
+#
+ 376 S M "CERT:O" "CWE:M" "MISRA-AC:O" "MISRA-C:2004:M" "SEC-C:M" "UML:M" "PDTMCSFVA:200000120" "K:lit"
+# Use of octal escape sequence.
+#
+ 377 S M "CWE:M" "Legacy:I" "MISRA-AC:O" "MISRA-C:2004:M" "SEC-C:M" "UML:M" "PDTMCSFVA:200000000" "K:lit"
+# Null character used within a string.
+#
+ 378 S M "EADS:M" "PDTMCSFVA:000003000" "K:struct"
+# Tag and type mismatch in struct/union/enum.
+#
+ 379 S C "EADS:C" "PDTMCSFVA:000030000" "K:pre" "K:style"
+# Macro exceeds *** continuation lines.
+#
+ 380 S M "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Enumeration element not on a new line.
+#
+ 381 S M "CERT:O" "EADS:M" "NETRINO:M" "PDTMCSFVA:000200010" "K:struct"
+# Enum, struct or union not typedeffed.
+#
+ 382 S M "ACME Standard:C" "CERT:O" "CWE:M:vals 383 1" "EADS:M" "JPL:M" "Legacy:I" "MISRA-C:2004:M:vals 383 1" "MISRA-C:2012:C" "PDTMCSFVA:000103100" "K:exp"
+# (void) missing for discarded return value.
+#
+ 383 S O "ACME Standard:C" "Legacy:I" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "UML:O" "PDTMCSFVA:000200200" "K:pre" "K:id"
+# Identifier name matches macro name.
+#
+ 384 S M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:300000000" "K:pre" "K:id"
+# Identifier matches macro name in 31 chars.
+#
+ 385 S M "ACME Standard:C" "FSB582-C:O" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:000003000" "K:switch"
+# MISRA switch statement syntax violation.
+#
+ 386 S M "EADS:M" "PDTMCSFVA:000003000" "K:style"
+# Less than *** blank lines separating procs.
+#
+ 387 S M "CAST:M" "CERT:O" "CMSE:M" "GJB:M" "PDTMCSFVA:000102000" "K:type"
+# Enum initialisation not integer literal.
+#
+ 388 S M "CMSE:M" "GJB:M" "Legacy:I" "PDTMCSFVA:000102100" "K:file"
+# Extern used in function body.
+#
+ 389 S M "CWE:M" "Legacy:M" "PDTMCSFVA:200000100" "K:exp"
+# Bool value incremented/decremented.
+#
+ 390 S M "PDTMCSFVA:030000200" "K:arr" "K:type"
+# Typedef array declaration.
+#
+# 391 S
+# Not used for 'c'.
+#
+# 392 S
+# Not used for 'c'.
+#
+# 393 S
+# Not used for 'c'.
+#
+# 394 S
+# Not used for 'c'.
+#
+# 395 S
+# Not used for 'c'.
+#
+# 396 S
+# Not used for 'c'.
+#
+ 397 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "GJB:M" "Legacy:M" "MISRA-AC:I" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:030000100" "K:arr"
+# Array initialisation has insufficient items.
+#
+ 398 S O "CMSE:M" "GJB:O" "PDTMCSFVA:000001100" "K:exp"
+# Boolean negation outside bracketed exprsn.
+#
+ 399 S M "CAST:M" "CMSE:M" "GJB:M" "Legacy:M" "PDTMCSFVA:000100000" "K:fn"
+# Function declared more than once.
+#
+ 400 S M "CERT:O" "GJB:M" "PDTMCSFVA:200000020" "K:exp"
+# Use of sizeof on a type.
+#
+ 401 S M "CERT:O" "CMSE:M" "CWE:M" "GJB:M" "Legacy:M" "PDTMCSFVA:200000130" "K:arr"
+# Use of sizeof on an array parameter.
+#
+ 402 S M "ACME Standard:C" "CMSE:M" "CWE:M" "GJB:M" "Legacy:M" "MISRA-C:2012:C" "PDTMCSFVA:030000300" "K:if"
+# Comparison of booleans.
+#
+ 403 S M "ACME Standard:C" "CAST:M" "CERT:M" "CMSE:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "Standard:M" "VSOS:M" "PDTMCSFVA:030000200" "K:exp"
+# Negative (or potentially negative) shift.
+#
+ 404 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CONFORM:M" "CWE:M" "FSB582-C:M" "GJB:M" "Legacy:M" "MISRA-AC:I" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000100" "K:arr"
+# Array initialisation has too many items.
+#
+ 405 S M "Legacy:I" "PDTMCSFVA:000020200" "K:pre"
+# Macro name appears in own replacement list.
+#
+ 406 S M "ACME Standard:C" "CERT:O" "CWE:M" "Customer Sample:M" "DERA:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:C" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000310" "K:exp"
+# Use of ++ or -- on RHS of && or || operator.
+#
+ 407 S M "ACME Standard:M" "CMSE:M" "CONFORM:M" "CWE:M" "GJB:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:030000200" "K:lib"
+# free used on string.
+#
+ 408 S M "ACME Standard:C" "CERT:O" "CWE:M" "Customer Sample:M" "DERA:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:C" "SEC-C:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000000" "K:exp"
+# Volatile variable accessed on RHS of && or ||.
+#
+ 409 S M "ACME Standard:O" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:O" "SEC-C:M:vals 191 1" "UML:M" "PDTMCSFVA:000222100" "K:loop" "K:jmp"
+# More than one break or goto statement in loop.
+#
+ 410 S M "ACME Standard:C" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:000003000" "K:switch"
+# Switch empty default has no comment.
+#
+ 411 S M "ACME Standard:C" "CWE:M" "DERA:M" "GJB:M" "Legacy:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:300000200" "K:conv"
+# Inappropriate value assigned to enum.
+#
+ 412 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "UML:M" "PDTMCSFVA:030000000" "K:file"
+# Undefined behaviour, \ before E-O-F.
+#
+ 413 S O "ACME Standard:O" "CAST:O" "GJB:O" "Legacy:I" "MISRA-C:2012:O" "NETRINO:O" "PDTMCSFVA:000300200" "K:type" "K:flow"
+# User type declared but not used in code analysed.
+#
+# 414 S
+# Not used for 'c'.
+#
+ 415 S M "CAST:M" "CMSE:M" "GJB:M" "PDTMCSFVA:001000100" "K:arr" "K:fnpar"
+# Single dimension array param size specified.
+#
+ 416 S M "CAST:M" "CMSE:M" "GJB:M" "PDTMCSFVA:001000000" "K:arr" "K:fnpar"
+# First array param dimension specified.
+#
+ 417 S M "JPL:M" "PDTMCSFVA:000202000" "K:pre"
+# Use of #if preprocessor command.
+#
+# 418 S
+# Not used for 'c'.
+#
+# 419 S
+# Not used for 'c'.
+#
+# 420 S
+# Not used for 'c'.
+#
+# 421 S
+# Not used for 'c'.
+#
+ 422 S M "PDTMCSFVA:000300200" "K:type"
+# More than one synonym in typedef.
+#
+# 423 S
+# Not used for 'c'.
+#
+# 424 S
+# Not used for 'c'.
+#
+ 425 S M "HIS:M" "Legacy:M" "MISRA:O" "PDTMCSFVA:000003000" "K:lit"
+# float literal with no F suffix.
+#
+ 426 S M "ACME Standard:O" "DERA:M" "HIS:M" "Legacy:I" "MISRA-AC:I" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:O" "SEC-C:M" "UML:M" "PDTMCSFVA:000300200" "K:pre"
+# #undef used in a block.
+#
+ 427 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "UML:M" "PDTMCSFVA:030000000" "K:file"
+# Filename in #include not in < > or " ".
+#
+ 428 S M "ACME Standard:C" "CWE:M" "FSB582-C:O" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "UML:M" "PDTMCSFVA:000202000" "K:switch"
+# No {} for switch (added by Testbed).
+#
+ 429 S M "ACME Standard:C" "HIS:O" "JPL:M" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "UML:M" "PDTMCSFVA:000112000" "K:loop"
+# Empty middle expression in for loop.
+#
+ 430 S M "ACME Standard:C" "HIS:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "UML:M" "PDTMCSFVA:000112000" "K:loop"
+# Inconsistent usage of loop control variable.
+#
+ 431 S M "ACME Standard:C" "CAST:M" "CMSE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "VSOS:M" "PDTMCSFVA:300000000" "K:conv"
+# Char used instead of (un)signed char.
+#
+ 432 S M "ACME Standard:C" "CAST:M" "CERT:O" "CMSE:M" "CWE:M" "DERA:M" "FSB582-C:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:300000220" "K:conv"
+# Inappropriate type - should be plain char.
+#
+ 433 S M "ACME Standard:C" "CERT:M" "CMSE:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "VSOS:M" "PDTMCSFVA:200000200" "K:conv"
+# Type conversion without cast.
+#
+ 434 S M "ACME Standard:C" "CERT:M" "CWE:M:vals 358 1" "DERA:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:O" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "VSOS:M" "PDTMCSFVA:030000220" "K:conv"
+# Signed/unsigned conversion without cast.
+#
+ 435 S M "ACME Standard:C" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "VSOS:M" "PDTMCSFVA:030000200" "K:conv"
+# Float/integer conversion without cast.
+#
+ 436 S M "ACME Standard:C" "Legacy:O" "MISRA-AC:M:vals 400 1" "MISRA-C:2004:M:vals 400 1" "MISRA-C:2012:C" "SEC-C:O" "PDTMCSFVA:030000200" "K:arr" "K:decl"
+# Declaration does not specify an array.
+#
+ 437 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000200" "K:ptr"
+# < > <= >= used on different object pointers.
+#
+ 438 S M "ACME Standard:C" "CERT:O" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000200" "K:ptr"
+# Pointer subtraction not addressing one array.
+#
+ 439 S M "ACME Standard:C" "CERT:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:200000210" "K:conv" "K:ptr"
+# Cast from pointer to integral type.
+#
+ 440 S M "ACME Standard:C" "CERT:M" "CWE:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "TBrun Requires:M" "PDTMCSFVA:200000210" "K:conv" "K:ptr"
+# Cast from integral type to pointer.
+#
+ 441 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M:vals 191 1" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000200" "K:conv"
+# Float cast to non-float.
+#
+ 442 S M "ACME Standard:C" "CERT:M" "CWE:M" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000210" "K:conv"
+# Signed integral type cast to unsigned.
+#
+ 443 S M "ACME Standard:C" "CERT:M" "CWE:M" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000210" "K:conv"
+# Unsigned integral type cast to signed.
+#
+ 444 S M "ACME Standard:C" "CERT:M" "CWE:M" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000210" "K:conv"
+# Integral type cast to non-integral.
+#
+ 445 S M "ACME Standard:C" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:030000200" "K:conv"
+# Narrower float conversion without cast.
+#
+ 446 S M "ACME Standard:C" "CERT:O" "CWE:M" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:030000200" "K:conv"
+# Narrower int conversion without cast.
+#
+ 447 S M "CWE:M" "PDTMCSFVA:000112000" "K:loop"
+# Loop termination not a simple constant test.
+#
+# 448 S
+# Not used for 'c'.
+#
+# 449 S
+# Not used for 'c'.
+#
+ 450 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:030000200" "K:lit"
+# Wide string and string concatenated.
+#
+ 451 S M "ACME Standard:C" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:O:vals 191 1" "PDTMCSFVA:220000200" "K:conv"
+# No cast for widening complex float expression.
+#
+ 452 S M "ACME Standard:C" "CERT:O" "CWE:M" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O:vals 191 1" "PDTMCSFVA:220000200" "K:conv"
+# No cast for widening complex int expression.
+#
+# 453 S
+# Not used for 'c'.
+#
+# 454 S
+# Not used for 'c'.
+#
+# 455 S
+# Not used for 'c'.
+#
+ 456 S M "CERT:M" "CWE:M" "MISRA-AC:M" "MISRA-C:2004:M" "NETRINO:M" "PDTMCSFVA:220000210" "K:conv"
+# Implicit float widening for function return.
+#
+ 457 S M "CERT:O" "CWE:M" "MISRA-AC:O" "MISRA-C:2004:M" "PDTMCSFVA:220000210" "K:conv"
+# Implicit int widening for function return.
+#
+ 458 S M "ACME Standard:C" "CERT:O" "CWE:M" "DERA:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:220000100" "K:conv"
+# Implicit conversion: actual to formal param.
+#
+ 459 S M "PDTMCSFVA:100000000" "K:arr" "K:fnpar"
+# Array passed as actual parameter.
+#
+# 460 S
+# Not used for 'c'.
+#
+ 461 S M "ACME Standard:C" "DERA:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "VSOS:M" "PDTMCSFVA:030000200" "K:id" "K:file"
+# Identifier with ambiguous linkage.
+#
+ 462 S M "GJB:M" "Legacy:M" "MISRA-AC:I" "MISRA-C:2004:M" "PDTMCSFVA:030000000" "K:struct"
+# Struct initialisation has insufficient items.
+#
+ 463 S M "SEC-C:M" "PDTMCSFVA:000300000" "K:arr" "K:struct"
+# Unnecessary comma in initialisation list.
+#
+ 464 S M "Legacy:M" "NETRINO:M" "PDTMCSFVA:100200000" "K:decl"
+# Use of auto specifier.
+#
+ 465 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:300000200" "K:struct"
+# Struct/union not completely specified.
+#
+ 466 S M "DERA:M" "HIS:M" "Legacy:O" "MISRA:M" "PDTMCSFVA:000302100" "K:lit"
+# long literal with no L suffix.
+#
+# 467 S
+# Not used for 'c'.
+#
+# 468 S
+# Not used for 'c'.
+#
+# 469 S
+# Not used for 'c'.
+#
+# 470 S
+# Not used for 'c'.
+#
+ 471 S M "PDTMCSFVA:000300000" "K:fn"
+# Function returns constant value.
+#
+ 472 S M "PDTMCSFVA:000103000" "K:style"
+# No comment after declaration.
+#
+ 473 S M "PDTMCSFVA:000301000" "K:type"
+# Typedef should not be used.
+#
+ 474 S M "FSB582-C:M" "PDTMCSFVA:000300000" "K:style"
+# Enum name is not all upper case.
+#
+ 475 S M "PDTMCSFVA:000301000" "K:fnpar"
+# Parameter needs IN/OUT/INOUT marker.
+#
+ 476 S O "CERT:M" "CWE:M" "PDTMCSFVA:010200130" "K:arr"
+# Array index not unsigned.
+#
+ 477 S M "ACME Standard:C" "FSB582-C:O" "MISRA-AC:I" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:000203000" "K:if"
+# Empty else clause following else if.
+#
+ 478 S M "MISRA-AC:M:vals 316 1" "MISRA-C:2004:M:vals 316 1" "PDTMCSFVA:300000200" "K:file" "K:pre"
+# Name starts with ISO reserved prefix.
+#
+ 479 S M "CWE:M" "Legacy:M" "PDTMCSFVA:300000200" "K:exp"
+# Right shift loses all bits.
+#
+ 480 S M "ACME Standard:M" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:300000220" "K:lib"
+# String function params access same variable.
+#
+ 481 S M "ACME Standard:C" "CONFORM:M" "FSB582-C:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:300000200" "K:arr" "K:struct"
+# Array with no bounds in struct.
+#
+ 482 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:300000200" "K:struct"
+# Incomplete structure referenced.
+#
+ 483 S M "ACME Standard:M" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:030000101" "K:lib"
+# free parameter is not heap item.
+#
+ 484 S M "ACME Standard:M" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:030000103" "K:lib"
+# Attempt to use already freed object.
+#
+# 485 S
+# Not used for 'c'.
+#
+ 486 S M "ACME Standard:C" "CERT:O" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:300200110" "K:io"
+# Incorrect number of formats in output function.
+#
+ 487 S M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:020000203" "K:lib"
+# Insufficient space allocated.
+#
+ 488 S M "ACME Standard:C" "CERT:O" "CWE:M" "Legacy:M" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:200000220" "K:conv"
+# Value outside range of underlying type.
+#
+ 489 S M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:020000230" "K:arr" "K:lib"
+# Insufficient space for operation.
+#
+ 490 S M "MISRA-AC:M" "MISRA-C:2004:M" "NETRINO:M" "PDTMCSFVA:000300100" "K:conv"
+# No cast for widening float parameter.
+#
+ 491 S M "CERT:O" "CWE:M" "MISRA-AC:O" "MISRA-C:2004:M" "PDTMCSFVA:000300100" "K:conv"
+# No cast for widening int parameter.
+#
+ 492 S C "EADS:C" "FSB582-C:O" "JPL:M" "PDTMCSFVA:000003010" "K:style"
+# Parameter not declared on new line.
+#
+ 493 S M "ACME Standard:O" "CAST:M" "CERT:M" "CMSE:M" "CONFORM:M" "CWE:M" "GJB:M" "HIS:O" "Legacy:M" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:O" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:000000230" "K:conv"
+# Numeric overflow.
+#
+ 494 S M "ACME Standard:O" "CAST:M" "CERT:M" "CMSE:M" "CONFORM:M" "CWE:M" "GJB:M" "HIS:O" "Legacy:M" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:O" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:000000230" "K:conv"
+# Numeric underflow.
+#
+ 495 S O "ACME Standard:O:vals 392 1" "FSB582-C:I:vals 392 1" "MISRA-AC:M:vals 392 1" "MISRA-C:2004:O:vals 392 1" "MISRA-C:2012:O:vals 392 1" "NETRINO:O:vals 392 1" "SEC-C:M:vals 392 1" "PDTMCSFVA:100301000" "K:type" "K:id"
+# Typedef name has no size indication.
+#
+ 496 S M "ACME Standard:M" "CERT:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "NETRINO:M" "SEC-C:M" "TBrun Requires:M" "PDTMCSFVA:300000100" "K:fn"
+# Function call with no prior declaration.
+#
+ 497 S M "ACME Standard:C" "CONFORM:M" "Legacy:I" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:300000100" "K:type"
+# Type is incomplete in translation unit.
+#
+ 498 S O "Legacy:O" "SEC-C:O" "PDTMCSFVA:000300100" "K:file"
+# Use of inline keyword.
+#
+# 499 S
+# Not used for 'c'.
+#
+# 500 S
+# Not used for 'c'.
+#
+# 501 S
+# Not used for 'c'.
+#
+# 502 S
+# Not used for 'c'.
+#
+ 503 S M "CWE:M" "Legacy:M" "RUNTIME:M" "PDTMCSFVA:020200100" "K:fn"
+# Function returns local resources.
+#
+# 504 S
+# Not used for 'c'.
+#
+# 505 S
+# Not used for 'c'.
+#
+# 506 S
+# Not used for 'c'.
+#
+# 507 S
+# Not used for 'c'.
+#
+# 508 S
+# Not used for 'c'.
+#
+ 509 S M "ACME Standard:C" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:jmp"
+# goto label is backwards.
+#
+ 510 S M "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:000300000" "K:loop"
+# Loop counter increment and operator defect.
+#
+ 511 S M "ACME Standard:C" "Legacy:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:jmp"
+# Jump into nested block.
+#
+# 512 S
+# Not used for 'c'.
+#
+# 513 S
+# Not used for 'c'.
+#
+# 514 S
+# Not used for 'c'.
+#
+# 515 S
+# Not used for 'c'.
+#
+# 516 S
+# Not used for 'c'.
+#
+# 517 S
+# Not used for 'c'.
+#
+# 518 S
+# Not used for 'c'.
+#
+# 519 S
+# Not used for 'c'.
+#
+ 520 S M "ACME Standard:C:vals 350 1" "Legacy:O:vals 331 1" "MISRA-C:2012:C:vals 350 1" "RUNTIME:M" "PDTMCSFVA:300000100" "K:struct"
+# Bit field is not bool or explicit integral.
+#
+# 521 S
+# Not used for 'c'.
+#
+# 522 S
+# Not used for 'c'.
+#
+# 523 S
+# Not used for 'c'.
+#
+# 524 S
+# Not used for 'c'.
+#
+# 525 S
+# Not used for 'c'.
+#
+# 526 S
+# Not used for 'c'.
+#
+# 527 S
+# Not used for 'c'.
+#
+# 528 S
+# Not used for 'c'.
+#
+# 529 S
+# Not used for 'c'.
+#
+ 530 S M "Legacy:M" "SEC-C:M" "PDTMCSFVA:000300000" "K:ptr" "K:lit"
+# NULL used in integer context.
+#
+ 531 S M "ACME Standard:C" "CWE:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:lit" "K:ptr"
+# Literal zero used in pointer context.
+#
+# 532 S
+# Not used for 'c'.
+#
+# 533 S
+# Not used for 'c'.
+#
+# 534 S
+# Not used for 'c'.
+#
+# 535 S
+# Not used for 'c'.
+#
+# 536 S
+# Not used for 'c'.
+#
+ 537 S M "PDTMCSFVA:000301000" "K:loop"
+# Extra loop control variable changed.
+#
+# 538 S
+# Not used for 'c'.
+#
+# 539 S
+# Not used for 'c'.
+#
+# 540 S
+# Not used for 'c'.
+#
+# 541 S
+# Not used for 'c'.
+#
+ 542 S M "PDTMCSFVA:000301000" "K:loop"
+# Extra loop control variable is not bool.
+#
+# 543 S
+# Not used for 'c'.
+#
+# 544 S
+# Not used for 'c'.
+#
+ 545 S M "ACME Standard:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:300000200" "K:stmt"
+# Assignment of overlapping storage.
+#
+# 546 S
+# Not used for 'c'.
+#
+# 547 S
+# Not used for 'c'.
+#
+# 548 S
+# Not used for 'c'.
+#
+# 549 S
+# Not used for 'c'.
+#
+ 550 S M "ACME Standard:C" "Legacy:I" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:300200100" "K:lit"
+# Unsuffixed hex or octal is unsigned, add U.
+#
+# 551 S
+# Not used for 'c'.
+#
+# 552 S
+# Not used for 'c'.
+#
+ 553 S M "ACME Standard:C" "CERT:O" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:000300000" "K:file" "K:fn"
+# Function and proto should both be static.
+#
+ 554 S M "ACME Standard:C" "Legacy:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:300000000" "K:conv"
+# Cast to an unrelated type.
+#
+# 555 S
+# Not used for 'c'.
+#
+# 556 S
+# Not used for 'c'.
+#
+# 557 S
+# Not used for 'c'.
+#
+# 558 S
+# Not used for 'c'.
+#
+# 559 S
+# Not used for 'c'.
+#
+ 560 S M "JPL:M" "PDTMCSFVA:000300100" "K:obj"
+# Scope of variable could be reduced.
+#
+# 561 S
+# Not used for 'c'.
+#
+ 562 S M "CERT:M" "CWE:M" "Legacy:I" "PDTMCSFVA:000000010" "K:pre"
+# Use of ++,-- or = in macro parameters.
+#
+ 563 S M "PDTMCSFVA:000000230" "K:ptr"
+# Address increment exceeds type limit.
+#
+# 564 S
+# Not used for 'c'.
+#
+ 565 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000233" "K:stmt"
+# Assignment to wider scope.
+#
+# 566 S
+# Not used for 'c'.
+#
+ 567 S M "ACME Standard:C" "CWE:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000200" "K:arr" "K:ptr"
+# Pointer arithmetic is not on array.
+#
+ 568 S M "CERT:O:vals 344 1" "Legacy:O" "SEC-C:M:vals 344 1" "PDTMCSFVA:030000100" "K:file" "K:pre"
+# #include "filename" uses standard library name.
+#
+# 569 S
+# Not used for 'c'.
+#
+# 570 S
+# Not used for 'c'.
+#
+# 571 S
+# Not used for 'c'.
+#
+ 572 S M "JPL:M" "Legacy:M" "PDTMCSFVA:030000200" "K:lib"
+# Side effect in assert.
+#
+ 573 S M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000100" "K:pre"
+# Macro concatenation of uni char names.
+#
+# 574 S
+# Not used for 'c'.
+#
+ 575 S M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000100" "K:file"
+# Linkage differs from previous declaration.
+#
+ 576 S M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:300000200" "K:ptr" "K:conv"
+# Function pointer is of wrong type.
+#
+ 577 S M "CERT:O" "CWE:M" "Legacy:M" "PDTMCSFVA:000000230" "K:exp"
+# Sizeof argument is a pointer.
+#
+ 578 S M "CERT:O" "Legacy:I" "PDTMCSFVA:020000200" "K:exp"
+# Sizeof used in arithmetic expression.
+#
+ 579 S M "CERT:O" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:000300000" "K:style"
+# More than one variable per declaration.
+#
+ 580 S C "ACME Standard:C" "CONFORM:C" "FSB582-C:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:O" "PDTMCSFVA:000200100" "K:pre"
+# Macro redefinition without using #undef.
+#
+ 581 S M "ACME Standard:C" "MISRA-AC:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:loop"
+# Loop conditions are independent.
+#
+ 582 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000110" "K:obj" "K:flow"
+# const object reassigned.
+#
+ 583 S M "CWE:M" "Legacy:M" "SEC-C:O" "PDTMCSFVA:000000300" "K:ptr" "K:lit"
+# Comparison of pointer and string literal.
+#
+ 584 S M "ACME Standard:I" "CERT:O" "CWE:M" "Legacy:O" "MISRA-C:2012:I" "RUNTIME:M" "PDTMCSFVA:010200130" "K:exp"
+# Remainder of % op could be negative.
+#
+ 585 S M "CERT:O" "CWE:M" "PDTMCSFVA:000200020" "K:exp"
+# Bitwise and arith operations on same data.
+#
+ 586 S M "CERT:O" "PDTMCSFVA:000000230" "K:io"
+# Format is not %j for user defined type.
+#
+ 587 S M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:300100200" "K:obj" "K:flow"
+# Const local variable not immediately initialised.
+#
+ 588 S O "CERT:O" "CWE:M" "PDTMCSFVA:020000130" "K:file"
+# Use of system function.
+#
+ 589 S O "ACME Standard:C" "CERT:O" "CONFORM:O" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:O" "PDTMCSFVA:030200100" "K:io"
+# Format is not appropriate type.
+#
+ 590 S O "ACME Standard:C" "CERT:O" "CONFORM:O" "CWE:M" "Legacy:O" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:320000100" "K:io"
+# Mode fault in fopen.
+#
+ 591 S M "ACME Standard:M" "CERT:M" "CWE:M" "Legacy:M" "MISRA-C:2012:M" "PDTMCSFVA:020000120" "K:io" "K:ptr"
+# Inappropriate use of file pointer.
+#
+ 592 S O "CERT:O" "CWE:M" "Legacy:O" "PDTMCSFVA:010000110" "K:io"
+# Use of filename based functions.
+#
+ 593 S O "CERT:O" "CWE:M" "Legacy:I" "PDTMCSFVA:010200100" "K:io"
+# Use fseek() rather than rewind().
+#
+ 594 S O "CERT:O" "CWE:M" "Legacy:O" "PDTMCSFVA:010200100" "K:io"
+# Use setvbuf() rather than setbuf().
+#
+# 595 S
+# Not used for 'c'.
+#
+# 596 S
+# Not used for 'c'.
+#
+# 597 S
+# Not used for 'c'.
+#
+ 598 S M "PDTMCSFVA:013000100" "K:arr"
+# Alternative array indexing used.
+#
+ 599 S M "Legacy:M" "PDTMCSFVA:013000100" "K:exp"
+# Use of && or || in initialisation.
+#
+ 600 S M "CERT:M" "CWE:M" "Legacy:M" "PDTMCSFVA:020000230" "K:lib"
+# Argument of strlen is unterminated.
+#
+# 601 S
+# Not used for 'c'.
+#
+ 602 S O "CERT:O" "CWE:M" "Legacy:O" "PDTMCSFVA:012000120" "K:lib"
+# strtok may change the parse string.
+#
+ 603 S O "PDTMCSFVA:000000000" "K:fnpar" "K:ptr"
+# Parameter should be declared * const.
+#
+ 604 S C "CWE:M:vals 217 1" "PDTMCSFVA:000303110" "K:lit" "K:exp"
+# Use of numeric literal as array bound/subscript.
+#
+ 605 S C "PDTMCSFVA:300000000" "K:type"
+# Use of long long.
+#
+ 606 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:300000000" "K:conv"
+# Cast involving function pointer.
+#
+ 607 S C "PDTMCSFVA:000300000" "K:exp"
+# Double negation found.
+#
+ 608 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:300000000" "K:exp"
+# Use of explicitly undefined language feature.
+#
+ 609 S M "PDTMCSFVA:300000000" "K:exp"
+# Use of implicitly undefined language feature.
+#
+ 610 S O "ACME Standard:O" "MISRA-C:2012:O" "PDTMCSFVA:000300200" "K:"
+# Label is unused.
+#
+ 611 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:000200120" "K:file"
+# Line splice used in // comment.
+#
+ 612 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:000300120" "K:fn"
+# inline function should be declared static.
+#
+ 613 S O "ACME Standard:C:vals 350 1" "MISRA-C:2012:C:vals 350 1" "PDTMCSFVA:000200220" "K:fnpar"
+# Use of restrict keyword.
+#
+ 614 S O "ACME Standard:M:vals 350 1" "MISRA-C:2012:M:vals 350 1" "PDTMCSFVA:000200220" "K:fnpar"
+# Use of static keyword in array parameter.
+#
+ 615 S M "ACME Standard:C" "CONFORM:M" "DERA:M" "FSB582-C:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:030000200" "K:conv"
+# Conditional operator has incompatible types.
+#
+ 616 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:030000000" "K:pre"
+# Preprocessor result not 0 or 1.
+#
+ 617 S M "CONFORM:M" "PDTMCSFVA:000000000" "K:fn"
+# Function call may return unexpected value.
+#
+ 618 S M "PDTMCSFVA:000000000" "K:lib"
+# Use of memcmp between structures.
+#
+ 619 S O "PDTMCSFVA:000000000" "K:fn"
+# Function address compared with zero or NULL.
+#
+ 620 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:000000000" "K:struct"
+# Initialisation designator duplicated.
+#
+ 621 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:000000000" "K:arr"
+# Variable-length array declared.
+#
+ 622 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:300000000" "K:pre" "K:id"
+# Macro parameters are not unique within limits.
+#
+ 623 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:030000010" "K:lit"
+# String assigned to non const object..
+#
+ 624 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:300000000" "K:type"
+# Inappropriate use of floating point type.
+#
+ 625 S M "ACME Standard:C:vals 391 1" "MISRA-C:2012:C:vals 391 1" "PDTMCSFVA:000200210" "K:pre"
+# Preprocessor name starts with underscore.
+#
+ 626 S M "ACME Standard:C:vals 391 1" "MISRA-C:2012:C:vals 391 1" "PDTMCSFVA:000200210" "K:pre"
+# #define of keyword.
+#
+ 627 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:030000000" "K:struct" "K:arr"
+# Initialiser both positional and designational.
+#
+ 628 S O "ACME Standard:O" "MISRA-C:2012:O" "PDTMCSFVA:000300200" "K:pre" "K:flow"
+# Macro not used in translation unit.
+#
+ 629 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:030000310" "K:exp"
+# Divide by zero found.
+#
+ 630 S M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:300000010" "K:type"
+# Duplicated enumeration value.
+#
+ 631 S M "ACME Standard:M" "MISRA-C:2012:M" "PDTMCSFVA:030000330" "K:flow"
+# Declaration not reachable.
+#
+#
+#
+# 'C' phase standards
+# -------------------
+#
+   1 C M "ACME Standard:M" "CAST:M" "Customer Sample:M" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:001130000" "K:metric"
+# Cyclomatic complexity greater than ***.
+#
+   2 C O "Customer Sample:O" "Standard:O" "PDTMCSFVA:000030000" "K:metric"
+# Procedure is not reducible in terms of intervals.
+#
+   3 C O "Customer Sample:O" "Standard:O" "PDTMCSFVA:000030000" "K:metric"
+# Procedure contains essential knots.
+#
+   4 C O "Customer Sample:O" "Standard:O" "PDTMCSFVA:000030200" "K:metric"
+# Procedure is not structured.
+#
+   5 C C "Customer Sample:C" "DERA:C" "JPL:M" "Legacy:O" "RUNTIME:C" "Standard:C" "TBrun Requires:C" "PDTMCSFVA:000030000" "K:fn" "K:flow"
+# Procedure contains infinite loop.
+#
+   6 C M "Customer Sample:M" "FSB582-C:M" "Legacy:M" "Standard:M" "PDTMCSFVA:000030000" "K:metric" "K:flow"
+# Procedure has more than one entry point.
+#
+   7 C C "ACME Standard:O" "Customer Sample:C" "DERA:C" "EADS:C" "FSB582-C:M" "MISRA-AC:C" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:O" "NETRINO:C" "SEC-C:O" "Standard:C" "UML:C" "VSOS:M" "PDTMCSFVA:000030000" "K:metric" "K:flow"
+# Procedure has more than one exit point.
+#
+   8 C M "PDTMCSFVA:000000000" "K:metric"
+# Unused LDRA_INSPECTED annotation.
+#
+   9 C M "PDTMCSFVA:000230000" "K:metric"
+# Ess Cyclomatic Complexity greater than ***.
+#
+  10 C M "PDTMCSFVA:000320000" "K:metric"
+# Loop depth greater than ***.
+#
+  11 C M "PDTMCSFVA:002230000" "K:metric"
+# More than *** depth 1 loops.
+#
+  12 C M "PDTMCSFVA:002230000" "K:metric"
+# More than *** knots.
+#
+  13 C M "PDTMCSFVA:002230000" "K:metric"
+# More then *** essential knots.
+#
+#
+#
+# 'D' phase standards
+# -------------------
+#
+   1 D C "ACME Standard:O" "CERT:O" "CMSE:O" "CWE:M" "Customer Sample:C" "Legacy:I" "MISRA-C:2012:O" "SEC-C:M" "Standard:C" "TBrun Requires:C" "VSOS:M" "PDTMCSFVA:000300310" "K:fnpar" "K:flow"
+# Unused procedure parameter.
+#
+   2 D M "ACME Standard:M" "CAST:M" "CMSE:M" "CONFORM:M" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "SEC-C:O" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000200" "K:fn" "K:flow"
+# Function does not return a value on all paths.
+#
+   3 D M "Customer Sample:M" "DERA:M" "Legacy:M" "Standard:M" "PDTMCSFVA:030000100" "K:fnpar" "K:flow"
+# Actual parameter is also global to procedure.
+#
+   4 D M "Legacy:I" "PDTMCSFVA:000300210" "K:flow"
+# Variables declared but not used in code analysed.
+#
+   5 D M "PDTMCSFVA:030000330" "K:flow"
+# UR  data flow anomalies found.
+#
+   6 D O "ACME Standard:C" "CWE:M" "Customer Sample:O" "DERA:O" "EADS:C" "HIS:O" "JPL:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:O" "SEC-C:M" "Standard:O" "UML:O" "VSOS:M" "PDTMCSFVA:000020000" "K:fn" "K:flow"
+# Recursion in procedure calls found.
+#
+   7 D O "PDTMCSFVA:000300210" "K:flow"
+# DU  data flow anomalies found.
+#
+   8 D O "CERT:O" "CWE:M" "JPL:M" "Legacy:O" "SEC-C:O" "PDTMCSFVA:000200310" "K:flow"
+# DD  data flow anomalies found.
+#
+   9 D C "CWE:M" "Customer Sample:C" "DERA:C" "RUNTIME:C" "Standard:C" "PDTMCSFVA:030000200" "K:fn" "K:flow"
+# Defined parameter has possible clear path.
+#
+  10 D O "PDTMCSFVA:000300200" "K:obj" "K:flow"
+# Globals used inside procedure.
+#
+  11 D M "Customer Sample:M" "Legacy:M" "Standard:M" "PDTMCSFVA:030000200" "K:fnpar" "K:flow"
+# Parameters do not match expected actions.
+#
+  12 D O "Customer Sample:O" "Standard:O" "PDTMCSFVA:000030000" "K:fnpar" "K:flow"
+# Referenced parameter has possible clear path.
+#
+  13 D M "Customer Sample:M" "Legacy:M" "Standard:M" "PDTMCSFVA:000300200" "K:fnpar" "K:flow"
+# Global used in procedure matches local parameter.
+#
+  14 D M "ACME Standard:O" "CWE:M" "DERA:M" "Legacy:I" "MISRA-C:2012:O" "SEC-C:O" "Standard:M" "PDTMCSFVA:000030200" "K:fnpar" "K:flow"
+# Attempt to change parameter passed by value.
+#
+  15 D C "ACME Standard:O" "CAST:M" "CERT:O" "CMSE:O" "CWE:M" "GJB:M" "Legacy:I" "MISRA-C:2012:O" "SEC-C:M" "VSOS:M" "PDTMCSFVA:000300210" "K:fnpar" "K:flow"
+# Unused procedural parameter.
+#
+  16 D C "DERA:C" "Legacy:O" "PDTMCSFVA:300000200" "K:fnpar" "K:flow"
+# Identical actual parameters in call.
+#
+  17 D M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Customer Sample:M" "DERA:M" "FSB582-C:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "UML:M" "VSOS:M" "PDTMCSFVA:300001010" "K:id"
+# Identifier not unique within *** characters.
+#
+  18 D C "ACME Standard:C" "Customer Sample:C" "DERA:C" "FSB582-C:M" "HIS:C" "MISRA-AC:O" "MISRA:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "SEC-C:M" "Standard:C" "VSOS:M" "PDTMCSFVA:200200300" "K:id"
+# Identifier name reused.
+#
+  19 D C "DERA:C" "HIS:C" "Legacy:M" "MISRA:C" "Standard:C" "VSOS:M" "PDTMCSFVA:220000300" "K:fn"
+# Procedure called before being defined.
+#
+  20 D M "CWE:M" "DERA:M" "HIS:M" "Legacy:M" "MISRA:M" "Standard:M" "VSOS:M" "PDTMCSFVA:220000210" "K:obj" "K:flow"
+# No declaration for variable found before use.
+#
+# 21 D
+# Not used for 'c'.
+#
+  22 D C "ACME Standard:C" "FSB582-C:O" "MISRA-C:2012:C" "PDTMCSFVA:030000200" "K:fn" "K:flow"
+# Function has global variable side effects.
+#
+  23 D C "PDTMCSFVA:030000200" "K:fnpar" "K:flow"
+# Function has parameter side effects.
+#
+  24 D M "CERT:M" "Customer Sample:M" "DERA:M" "EADS:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "NETRINO:M" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:000002110" "K:fn"
+# Procedure definition has no associated prototype.
+#
+  25 D O "ACME Standard:O" "DERA:O" "HIS:O" "JPL:M" "Legacy:I" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:O" "NETRINO:O" "SEC-C:O" "Standard:O" "VSOS:M" "PDTMCSFVA:001200200" "K:obj" "K:flow"
+# Scope of variable could be reduced.
+#
+  26 D M "ACME Standard:C" "Customer Sample:M" "DERA:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "VSOS:M" "PDTMCSFVA:000300000" "K:obj"
+# Variable should be defined once in only one file.
+#
+  27 D O "ACME Standard:C" "CERT:O" "CWE:M" "Customer Sample:O" "DERA:O" "EADS:M" "FSB582-C:M" "HIS:O" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:O" "SEC-C:M" "Standard:O" "VSOS:M" "PDTMCSFVA:000300200" "K:obj"
+# Variable should be declared static.
+#
+  28 D M "Customer Sample:M" "DERA:M" "EADS:C" "JPL:M" "Legacy:I" "RUNTIME:M" "SEC-C:M" "Standard:M" "TBrun Requires:M" "VSOS:M" "PDTMCSFVA:000030000" "K:loop"
+# Potentially infinite loop found.
+#
+  29 D M "VSOS:M" "PDTMCSFVA:000300300" "K:fnpar" "K:struct"
+# Partially used structure parameter.
+#
+# 30 D
+# Not used for 'c'.
+#
+# 31 D
+# Not used for 'c'.
+#
+  32 D M "Customer Sample:M" "Standard:M" "PDTMCSFVA:030000200" "K:fnpar"
+# Formal parameter not defined.
+#
+  33 D M "ACME Standard:C" "DERA:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:030000200" "K:obj"
+# No real declaration for external variable.
+#
+  34 D M "ACME Standard:C" "Customer Sample:M" "DERA:M" "HIS:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "Standard:M" "VSOS:M" "PDTMCSFVA:000200200" "K:fn" "K:id"
+# Procedure name re-used in different files.
+#
+  35 D M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "DERA:M" "FSB582-C:O" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:300000220" "K:exp"
+# Expression has side effects.
+#
+  36 D M "ACME Standard:C" "DERA:M" "FSB582-C:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "VSOS:M" "PDTMCSFVA:000200200" "K:fn"
+# Prototype and definition name mismatch.
+#
+  37 D C "PDTMCSFVA:030000000" "K:fn"
+# Function has persistent local side effects.
+#
+  38 D M "DERA:M" "EADS:M" "VSOS:O" "PDTMCSFVA:001200000" "K:loop"
+# More than one control variable for loop.
+#
+  39 D C "Legacy:I" "PDTMCSFVA:000030000" "K:loop"
+# More than one entry to a loop.
+#
+  40 D C "EADS:C" "PDTMCSFVA:000030200" "K:loop"
+# More than one exit from a loop.
+#
+  41 D M "CERT:M" "CWE:M" "DERA:M" "EADS:M" "HIS:M" "Legacy:M" "MISRA:M" "VSOS:M" "PDTMCSFVA:000002310" "K:fn"
+# Procedure call has no prototype declared.
+#
+  42 D M "ACME Standard:C" "CAST:M" "CERT:M" "CONFORM:M" "CWE:M" "DERA:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "UML:M" "VSOS:M" "PDTMCSFVA:030000300" "K:fn" "K:ptr"
+# Local pointer returned in function result.
+#
+  43 D M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "EADS:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:030000310" "K:exp"
+# Divide by 0 found.
+#
+# 44 D
+# Not used for 'c'.
+#
+  45 D M "ACME Standard:C" "CERT:M" "CMSE:M" "CONFORM:M" "CWE:M" "EADS:M" "GJB:M" "HIS:M" "Legacy:O" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "TBrun Requires:M" "UML:M" "PDTMCSFVA:030000130" "K:ptr"
+# Pointer not checked for null before use.
+#
+# 46 D
+# Not used for 'c'.
+#
+  47 D M "PDTMCSFVA:000000000" "K:misc"
+# Unused inspect annotation.
+#
+  48 D M "ACME Standard:M" "CWE:M" "Legacy:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:030000300" "K:io"
+# Attempt to write to unopened file.
+#
+  49 D M "ACME Standard:C" "CERT:M" "CWE:M" "Legacy:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:030000320" "K:io"
+# File pointer not closed on exit.
+#
+  50 D M "ACME Standard:C" "CERT:O" "CMSE:M" "CWE:M" "EADS:M" "GJB:M" "Legacy:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:030000303" "K:lib"
+# Memory not freed after last reference.
+#
+  51 D M "ACME Standard:M" "CERT:M" "CMSE:M" "CONFORM:M" "CWE:M" "EADS:M" "GJB:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:030000203" "K:lib"
+# Attempt to read from freed memory.
+#
+# 52 D
+# Not used for 'c'.
+#
+  53 D M "ACME Standard:M" "CERT:O" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "PDTMCSFVA:000200230" "K:ptr"
+# Attempt to use uninitialised pointer.
+#
+  54 D M "CERT:O" "CWE:M" "Legacy:M" "RUNTIME:M" "PDTMCSFVA:030000210" "K:ptr" "K:obj"
+# Unsafe use of function pointer variable.
+#
+  55 D M "ACME Standard:C" "Customer Sample:M" "DERA:M" "EADS:M" "HIS:M" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "Standard:M" "UML:M" "PDTMCSFVA:000003200" "K:loop"
+# Modification of loop counter in loop body.
+#
+# 56 D
+# Not used for 'c'.
+#
+  57 D M "CAST:M" "CERT:M" "CMSE:O" "CWE:M" "GJB:M" "NETRINO:M" "PDTMCSFVA:030000200" "K:obj" "K:flow"
+# Global not initialised at declaration.
+#
+  58 D M "PDTMCSFVA:000203000" "K:lit"
+# Character or string literal re-used.
+#
+  59 D O "NETRINO:O" "PDTMCSFVA:010300100" "K:fnpar"
+# Parameter should be declared const.
+#
+  60 D M "ACME Standard:C" "DERA:O" "HIS:O" "Legacy:M" "MISRA-AC:M" "MISRA:O" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:000202100" "K:obj"
+# External object should be declared only once.
+#
+  61 D M "ACME Standard:C" "CERT:O" "CWE:M" "FSB582-C:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:003000000" "K:fn"
+# Procedure should be declared static.
+#
+  62 D O "ACME Standard:O" "CERT:O" "CWE:M" "FSB582-C:M" "HIS:O" "MISRA-AC:O" "MISRA:O" "MISRA-C:2004:O" "MISRA-C:2012:O" "NETRINO:O" "SEC-C:M" "PDTMCSFVA:003000000" "K:fnpar" "K:ptr"
+# Pointer parameter should be declared const.
+#
+  63 D M "ACME Standard:C" "CONFORM:M" "CWE:M" "GJB:O" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:300000200" "K:fn"
+# No definition in system for prototyped procedure.
+#
+  64 D C "NETRINO:C" "PDTMCSFVA:300100200" "K:obj" "K:flow"
+# Local not initialised at declaration.
+#
+  65 D M "ACME Standard:C" "CERT:O" "Legacy:M" "MISRA-C:2012:C" "PDTMCSFVA:001210010" "K:fn" "K:flow"
+# Void function has no side effects.
+#
+  66 D M "PDTMCSFVA:000300000" "K:loop"
+# Non boolean control variable modified in loop.
+#
+  67 D O "PDTMCSFVA:000300001" "K:fn" "K:flow"
+# Void function has global variable side effects.
+#
+  68 D O "PDTMCSFVA:000300001" "K:fn" "K:flow"
+# Void function has persistent local side effects.
+#
+  69 D M "ACME Standard:M" "CAST:M" "CERT:M" "CMSE:M" "CONFORM:M" "CWE:M" "Customer Sample:O" "DERA:M" "GJB:M" "HIS:M" "JPL:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:M" "RUNTIME:M" "SEC-C:O" "Standard:O" "UML:O" "VSOS:M" "PDTMCSFVA:030000330" "K:flow"
+# UR anomaly, variable used before assignment.
+#
+  70 D M "CERT:O" "CWE:M" "JPL:M" "Legacy:O" "SEC-C:M" "PDTMCSFVA:000300210" "K:flow"
+# DU anomaly, variable value is not used.
+#
+# 71 D
+# Not used for 'c'.
+#
+  72 D M "ACME Standard:C" "CERT:O" "CONFORM:M" "CWE:M" "FSB582-C:O" "Legacy:M" "MISRA-AC:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:300000220" "K:exp"
+# Potential side effect problem in expression.
+#
+  73 D M "PDTMCSFVA:000003200" "K:if"
+# Predicate variable modified in condition.
+#
+  74 D M "ACME Standard:C" "CERT:O" "CONFORM:M" "CWE:M" "FSB582-C:O" "Legacy:I" "MISRA-AC:C" "MISRA-C:2004:C" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:300000220" "K:exp"
+# Potential side effect from repeated function call.
+#
+  75 D M "ACME Standard:C" "CERT:M" "CWE:M" "Legacy:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:030000320" "K:io"
+# Attempt to open file pointer more than once.
+#
+  76 D C "ACME Standard:C" "CAST:O" "CMSE:O" "CWE:M" "GJB:M" "Legacy:I" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300200" "K:fn" "K:flow"
+# Procedure not called in code analysed.
+#
+  77 D M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000300" "K:struct" "K:fn"
+# Local structure returned in function result.
+#
+  78 D M "CERT:O" "SEC-C:M" "PDTMCSFVA:000300100" "K:obj" "K:flow"
+# Global variable should be declared const.
+#
+# 79 D
+# Not used for 'c'.
+#
+  80 D O "CERT:O" "CWE:M" "JPL:M" "Legacy:I" "SEC-C:M" "PDTMCSFVA:000300210" "K:fn" "K:flow"
+# Potentially unused function-modified value.
+#
+  81 D O "CERT:O" "CWE:M" "Legacy:O" "RUNTIME:M" "PDTMCSFVA:030000301" "K:io"
+# Attempt to remove an open file.
+#
+  82 D M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000131" "K:io"
+# fsetpos values not generated by fgetpos.
+#
+  83 D O "ACME Standard:C" "CERT:O" "CONFORM:O" "CWE:M" "Legacy:O" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000211" "K:io"
+# Potentially repeated call to ungetc.
+#
+  84 D M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:020000101" "K:io"
+# No fseek or flush before I/O.
+#
+  85 D O "CERT:O" "CWE:M" "Legacy:O" "PDTMCSFVA:020000121" "K:io"
+# Filename not verified before fopen.
+#
+  86 D M "CERT:M" "CWE:M" "Legacy:I" "PDTMCSFVA:030000230" "K:io"
+# User input not checked before use.
+#
+  87 D M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:030000221" "K:lib"
+# Illegal shared object in signal handler.
+#
+  88 D M "CERT:M" "CWE:M" "Legacy:M" "RUNTIME:M" "PDTMCSFVA:200030020" "K:lib"
+# Illegal use of longjmp in signal handler.
+#
+  89 D M "ACME Standard:C" "CERT:M" "CWE:M" "Legacy:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:030000210" "K:lib"
+# Illegal use of raise in signal handler.
+#
+  90 D M "CWE:M" "Legacy:M" "PDTMCSFVA:030000220" "K:lib"
+# Unguarded global used in threaded function.
+#
+  91 D M "ACME Standard:C" "CWE:M" "Legacy:I" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300210" "K:fn"
+# Function return value potentially unused.
+#
+# 92 D
+# Not used for 'c'.
+#
+  93 D O "CERT:O" "SEC-C:M" "PDTMCSFVA:000000000" "K:id" "K:flow"
+# Local variable should be declared const.
+#
+  94 D M "CAST:M" "CERT:O" "CMSE:O" "CWE:M" "Customer Sample:M" "DERA:M" "GJB:O" "Legacy:I" "Standard:M" "VSOS:M" "PDTMCSFVA:000300210" "K:id" "K:flow"
+# Named variable declared but not used in code.
+#
+  95 D O "PDTMCSFVA:000300200" "K:obj" "K:flow"
+# Named global function pointer used in procedure.
+#
+# 96 D O "Legacy:I" "PDTMCSFVA:000200310" "K:flow"
+# Variable has repeated initialisation.
+#
+  97 D M "CERT:M" "CWE:M" "Legacy:M" "PDTMCSFVA:030000221" "K:lib"
+# Signal called from within signal handler.
+#
+  98 D O "ACME Standard:M" "Legacy:O" "MISRA-C:2012:M" "PDTMCSFVA:030000301" "K:io"
+# Attempt to write to file opened read only.
+#
+  99 D O "PDTMCSFVA:000300200" "K:obj" "K:flow"
+# Named pointer object used in procedure.
+#
+# 100 D
+# Not used for 'c'.
+#
+# 101 D
+# Not used for 'c'.
+#
+# 102 D
+# Not used for 'c'.
+#
+ 103 D M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:030000300" "K:io"
+# File opened both read and write.
+#
+ 104 D O "ACME Standard:O" "MISRA-C:2012:O" "PDTMCSFVA:000000000" "K:struct" "K:flow"
+# Structure implementation not hidden.
+#
+ 105 D M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:000300210" "K:flow"
+# DU anomaly dead code, variable value is unused on all paths.
+#
+ 106 D M "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:000002110" "K:fn"
+# No prototype for non static functions.
+#
+#
+#
+# 'X' phase standards
+# -------------------
+#
+   1 X M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Customer Sample:M" "DERA:M" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "Standard:M" "VSOS:M" "PDTMCSFVA:030000230" "K:obj" "K:file"
+# Declaration types do not match across a system.
+#
+   2 X O "CAST:M" "DERA:M" "HIS:O" "Legacy:O" "MISRA:M" "VSOS:M" "PDTMCSFVA:030000200" "K:obj" "K:file"
+# Ambiguous declaration of variable.
+#
+   3 X O "PDTMCSFVA:000300200" "K:obj" "K:flow"
+# Variable has only one use.
+#
+   4 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: struct/union tag repeated.
+#
+   5 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: struct vs union.
+#
+   6 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: struct/union tag vs enum tag.
+#
+   7 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs procedure.
+#
+   8 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs procedure parameter.
+#
+   9 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs variable.
+#
+  10 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs label (MR).
+#
+  11 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs typedef.
+#
+  12 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs macro.
+#
+  13 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs component.
+#
+  14 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: tag vs enum constant.
+#
+  15 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs tag.
+#
+  16 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs variable.
+#
+  17 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs label (MR).
+#
+  18 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs typedef.
+#
+  19 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs procedure parameter.
+#
+  20 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs typedef.
+#
+  21 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs macro.
+#
+  22 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs component.
+#
+  23 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs enum constant.
+#
+  24 X M "ACME Standard:C" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: typedef vs procedure.
+#
+  25 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: procedure vs procedure param.
+#
+  26 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs label (MR).
+#
+  27 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persist var vs persist var.
+#
+  28 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs var.
+#
+  29 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs procedure.
+#
+  30 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs proc param.
+#
+  31 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: procedure vs procedure.
+#
+  32 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: procedure vs var.
+#
+  33 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: procedure vs label (MR).
+#
+  34 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: proc vs macro.
+#
+  35 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: proc vs component.
+#
+  36 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: proc vs enum constant.
+#
+  37 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs macro.
+#
+  38 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs component.
+#
+  39 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: persistent var vs enum constant.
+#
+  40 X O "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: component vs var.
+#
+  41 X O "GJB:M" "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: label vs variable (MR).
+#
+  42 X O "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: component vs procedure param.
+#
+  43 X O "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: label vs procedure param (MR).
+#
+  44 X O "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: component vs enum constant.
+#
+  45 X O "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: component vs label (MR).
+#
+  46 X O "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: label vs enum constant (MR).
+#
+  47 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: component vs macro.
+#
+  48 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "SEC-C:M" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: label vs macro (MR).
+#
+  49 X O "MISRA-AC:I" "MISRA-C:2004:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: var vs proc param.
+#
+  50 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: var vs macro.
+#
+  51 X O "MISRA-AC:I" "MISRA-C:2004:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: var vs enum constant.
+#
+  52 X O "MISRA-AC:I" "MISRA-C:2004:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: proc param vs proc param.
+#
+  53 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: proc param vs macro.
+#
+  54 X O "MISRA-AC:I" "MISRA-C:2004:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: proc param vs enum constant.
+#
+  55 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: label vs label (MR).
+#
+# 56 X
+# Not used for 'c'.
+#
+  57 X O "ACME Standard:C" "MISRA-AC:I" "MISRA-C:2004:O" "MISRA-C:2012:C" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: macro vs enum constant.
+#
+  58 X O "MISRA-AC:I" "MISRA-C:2004:O" "SEC-C:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: component vs component.
+#
+  59 X O "MISRA-AC:I" "MISRA-C:2004:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: enum constant vs enum constant.
+#
+  60 X O "MISRA-AC:I" "MISRA-C:2004:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier reuse: variable vs variable.
+#
+  61 X M "ACME Standard:C" "CERT:M" "CWE:M" "DERA:M" "FSB582-C:M" "HIS:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "PDTMCSFVA:300300210" "K:id"
+# Identifier match in *** chars.
+#
+  62 X M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:000300000" "K:fn"
+# Function prototype/defn return type mismatch (MR).
+#
+  63 X M "ACME Standard:C" "CONFORM:M" "CWE:M" "FSB582-C:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "RUNTIME:M" "SEC-C:M" "PDTMCSFVA:000300000" "K:fnpar"
+# Function prototype/defn param type mismatch (MR).
+#
+  64 X M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000330" "K:arr"
+# Array bound exceeded at call.
+#
+  65 X M "PDTMCSFVA:002030000" "K:jmp" "K:loop"
+# continue in ill-formed loop.
+#
+  66 X M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:020000203" "K:arr" "K:lib"
+# Insufficient array space at call.
+#
+  67 X M "ACME Standard:O" "CERT:O" "Legacy:I" "MISRA-C:2012:O" "PDTMCSFVA:000300000" "K:id"
+# Identifier is typographically ambiguous.
+#
+  68 X M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:020000230" "K:arr"
+# Parameter indexing array too big at call.
+#
+  69 X M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000330" "K:arr"
+# Global array bound exceeded at use.
+#
+  70 X M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:020000203" "K:arr" "K:lib"
+# Array has insufficient space.
+#
+  71 X M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "PDTMCSFVA:020000203" "K:arr" "K:lib"
+# Insufficient space for copy.
+#
+  72 X M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:O" "PDTMCSFVA:030000330" "K:arr"
+# Parameter indexing array too small at call.
+#
+#
+#
+# 'I' phase standards
+# -------------------
+#
+# 1 I M "Legacy:I" "PDTMCSFVA:000300100" "K:obj" "K:flow"
+# Local variables contribute nothing to results.
+#
+#
+#
+# 'Q' phase standards
+# -------------------
+#
+   1 Q M "ACME Standard:C" "CERT:M" "CONFORM:M" "CWE:M" "DERA:M" "FSB582-C:O" "HIS:M" "Legacy:M" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "UML:M" "VSOS:M" "PDTMCSFVA:030000200" "K:exp"
+# Call has execution order dependant side effects.
+#
+   2 Q M "DERA:M" "PDTMCSFVA:000030000" "K:metric"
+# LCSAJ density exceeds ***.
+#
+   3 Q M "NETRINO:M" "VSOS:O" "PDTMCSFVA:300001000" "K:style"
+# Filename contains upper case letters.
+#
+   4 Q M "CMSE:M" "FSB582-C:M" "GJB:M" "NETRINO:M" "SEC-C:M" "PDTMCSFVA:300001000" "K:style"
+# Included file has path.
+#
+   5 Q M "ACME Standard:C" "CONFORM:M" "CWE:M" "Legacy:M" "MISRA-AC:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "NETRINO:M" "UML:M" "PDTMCSFVA:300000000" "K:file"
+# File does not end with new line.
+#
+#
+#
+# 'U' phase standards
+# -------------------
+#
+   1 U M "ACME Standard:C" "CWE:M" "DERA:M" "EADS:M" "HIS:M" "JPL:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "UML:M" "PDTMCSFVA:000020000" "K:file" "K:flow"
+# Inter-file recursion found.
+#
+# 2 U M "CAST:O" "Legacy:I" "PDTMCSFVA:000300200" "K:file" "K:flow"
+# Procedure not called anywhere in system.
+#
+# 3 U M "Legacy:I" "PDTMCSFVA:000300200" "K:file" "K:flow"
+# No procedures in this file called from other files.
+#
+#
+#
+# 'J' phase standards
+# -------------------
+#
+   1 J M "ACME Standard:C" "CERT:O" "CWE:M" "DERA:M" "HIS:M" "Legacy:I" "MISRA-AC:M" "MISRA:M" "MISRA-C:2004:M" "MISRA-C:2012:C" "RUNTIME:M" "SEC-C:M" "UML:M" "PDTMCSFVA:000030210" "K:flow"
+# Unreachable Code found.
+#
+   2 J M "Legacy:M" "PDTMCSFVA:000000000" "K:misc"
+# Unused inspect annotation.
+#
+   3 J O "ACME Standard:C" "MISRA-C:2012:C" "PDTMCSFVA:000030200" "K:flow"
+# All internal linkage calls unreachable.
+#
+#
+#
+# 'Z' phase standards
+# -------------------
+#
+   1 Z M "PDTMCSFVA:000000000" "K:style"
+# File exceeds required size.
+#
+#
+#
+# 'H' phase standards
+# -------------------
+#
+   1 H M "FSB582-C:M" "NETRINO:M" "PDTMCSFVA:000003000" "K:style"
+# Global Variable does not conform to style g_<name>.
+#
+# 2 H
+# Not used for 'c'.
+#
+   3 H M "PDTMCSFVA:000003000" "K:style"
+# Enum Element does not conform to style e_<name>.
+#
+# 4 H
+# Not used for 'c'.
+#
+# 5 H
+# Not used for 'c'.
+#
+   6 H M "NETRINO:M" "PDTMCSFVA:000003000" "K:style"
+# Pointer does not conform to style p_<name>.
+#
+   7 H M "PDTMCSFVA:000003000" "K:style"
+# Enum Name does not conform to style E<name>.
+#
+   8 H M "ACME Standard" "FSB582-C:M" "NETRINO:M" "PDTMCSFVA:000003000" "K:style"
+# Global Func Name does not conform to style <file>_<name>.
+#
+   9 H M "ACME Standard" "PDTMCSFVA:000000000" "K:style"
+# Global Var Name does not conform to style <file>_<name>.
+#
+#
+# =====================================================================
+# Section three
+#
+# This section contains the parameters for additional standards
+# (Quality Report only).
+# Type 1001 is the number of mandatory lines of comments in each procedure heading
+# Type 1002 is the ratio of comments lines to code lines.
+# To prevent reporting of comments reduce the required value to:
+#  0 for type 1001
+#  0.0 for type 1002
+#
+# A Type 2000 terminator must always be included at the end of the parameter list.
+# e.g.
+#
+ 1001 5
+ 1002 0.1
+# Type 2000 is the terminator code for Standards
+#
+ 2000
+#
+# =====================================================================
+# Section four
+#
+# This section contains the names of analysed header files to be
+# excluded from reporting. Standards violations from these files will
+# not be displayed. Format is either full path or short file name only,
+# enclosed in quotation marks, with a leading space. Note that nesting
+# is not taken into account, all files must be explicitly entered below.
+# C/C++ Examples:
+# "example.h"
+# "C:\Includes\inc.h"
+#
+# The section has a -1 terminator.
+#
+# C Standard Library Header files:
+# "assert.h"
+# "ctype.h"
+# "errno.h"
+# "float.h"
+# "limits.h"
+# "locale.h"
+# "setjmp.h"
+# "math.h"
+# "signal.h"
+# "stdarg.h"
+# "stddef.h"
+# "stdio.h"
+# "stdlib.h"
+# "string.h"
+# "time.h"
+#
+ -1
