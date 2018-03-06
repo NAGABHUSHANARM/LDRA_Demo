@@ -108,7 +108,7 @@ time /t
 rem Generate report using TBpublish into the Jenkins workspace
 rem ==========================================================
 if not exist %REPORT_DIR% mkdir %REPORT_DIR%
-%TBED%\contestbed %SRC_FILES% /1q /publish_to_dir=%REPORT_DIR% /publish_rep_type=HTML
+%TBED%\contestbed %SRC_FILES% /1q /publish_to_dir=%REPORT_DIR% 
 
 time /t
 rem Finally clear up any superfluous files in the workspace
