@@ -3,12 +3,12 @@ $ Begin Test Regression Automation Information
 $ Source code names / locations:
 $ ==============================
 $ 
-$ C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\program.c
+$ C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Src\program.c
 $ 
 $ Automation Example:
 $ ===================
 $ 
-$ start /wait contbrun "C:\Users\nagabhushana.mallu\Desktop\LDRA_demo.tcf" /regress /quit
+$ start /wait contbrun "C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Functionalandunittests\LDRA_Demo.tcf" /regress /quit
 $ 
 $ End Test Regression Automation Information
 
@@ -24,15 +24,15 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
 
     # Begin Source Files
 
-    RelativeFile = .\program.c
-    File = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Src\program.c
-    UNCFile = \\AEI-OF-WD0048\C\Users\nagabhushana.mallu\Desktop\LDRA_Demo\mian\Src\program.c
+    RelativeFile = .\Src\program.c
+    File = .\Src\program.c
+    UNCFile = .\Src\program.c
 
     # End Source Files
 
     # Begin Sysearch Include File Entries
 
-    SearchPath = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\
+    SearchPath = .\Src
     IgnoreInclude_300 = string.h
     IgnoreInclude_300 = Std_Types.h
 
@@ -47,7 +47,7 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
 
     set_attributes = 2 1 1 1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
     nb_mechanism = build
-    nb_start_in_dir = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\
+    nb_start_in_dir = .\Src
     nb_build_command = gcc "$$h.$$e" -o "$$i$$x$$g"
     nb_compile_command = gcc -c "$$d$$f.$$e"
     nb_link_command = gcc $$h.o -o "$$s"
@@ -102,6 +102,8 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
     dyn_oview_files_table = 0
     syntax_only = F
     include = T
+    sys_inc_mode = 3
+    sys_inc_local = F
     open_all_includes = F
     last_complexity_choice = 0
     shorten = T
@@ -131,7 +133,7 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
     cppexternal_standard = MISRA-C++:2008
     cpp_dialect = GCC
     application_accessed = Testbed
-    sysearch = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\sysearch.dat
+    sysearch = .\main\sysearch.dat
     sysppvar = <Default search - Source dir(s) - Installdir>
     dynamic_run_number = 1
     history = 10
@@ -413,7 +415,7 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
 
     # Begin Attributes
 
-      Sequence Name = demo_seq_01
+      Sequence Name = seq_01
       Initial Compiler = MinGW200 GCC C/C++ v3.2
       Language Code = 2
       Version = 9.7.0
@@ -422,11 +424,11 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
 
     # Begin Test Case
 
-      File = ..\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Src\program.c
+      File = .\Src\program.c
       Procedure = main
       Procedure Number = 1
       Auto Create Object = T
-      Creation Date = Mar 05 2018 16:51:00
+      Creation Date = Mar 06 2018 16:54:31
 
         # Begin Variable
 
@@ -466,22 +468,22 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
 
         # Begin Variable
 
-          Name = %
-          Decl_type = int
-          Usage = O
-          Value = 0
-
-        # End Variable
-
-        # Begin Removed Variable
-
           Name = stdout
           Decl_type = stdio
           Usage = D
           TBrun Analysis = Suspended
           Value = 40
 
-        # End Removed Variable
+        # End Variable
+
+        # Begin Variable
+
+          Name = %
+          Decl_type = int
+          Usage = O
+          Value = 0
+
+        # End Variable
 
     # End Test Case
 
@@ -971,7 +973,7 @@ bool
 
 # Begin White Files
 
-..\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Src\program.c
+.\Src\program.c
 
 # End White Files
 
