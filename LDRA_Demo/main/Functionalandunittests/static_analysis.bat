@@ -26,7 +26,7 @@ setlocal
 rem Configure paths that are likely to change
 rem =========================================
 set PRJ_NAME=LDRA_demo
-set TCF_ROOT=C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\LDRA_Demo\main\Functionalandunittests
+set TCF_ROOT=%cd%
 
 rem remove any existing SET_TEST.BAT file
 rem =====================================
@@ -97,32 +97,6 @@ time /t
 rem Run the Main Static, Complexity, Data Flow & Cross Reference
 rem ============================================================
 %TBED%\contestbed %SRC_FILES% /112a34q
-
-time /t
-
-rem Instrument and build
-rem ====================
-%TBED%\contestbed %SRC_FILES% /212q
-
-time /t
-
-rem Execute and run the Dynamic Analysis and Dynamic Data Flow Analysis
-rem ===================================================================
-%SRC_DIR%\LDRA_demo.exe < %TCF_ROOT%\Input_adding_products.txt
-move /Y *.exh %SRC_DIR%
-%TBED%\contestbed %SRC_FILES% /run_required_dyndflow /dataset=Input_adding_products
-
-%SRC_DIR%\LDRA_demo.exe < %TCF_ROOT%\Input_cancelling_products.txt
-move /Y *.exh %SRC_DIR%
-%TBED%\contestbed %SRC_FILES% /run_required_dyndflow /dataset=Input_cancelling_products
-
-%SRC_DIR%\LDRA_demo.exe < %TCF_ROOT%\Input_filling_the_basket.txt
-move /Y *.exh %SRC_DIR%
-%TBED%\contestbed %SRC_FILES% /run_required_dyndflow /dataset=Input_filling_the_basket
-
-%SRC_DIR%\LDRA_demo.exe < %TCF_ROOT%\Input_ignoring_erroneous_commands.txt
-move /Y *.exh %SRC_DIR%
-%TBED%\contestbed %SRC_FILES% /run_required_dyndflow /dataset=Input_ignoring_erroneous_commands
 
 time /t
 
