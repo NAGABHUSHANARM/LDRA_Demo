@@ -25,8 +25,8 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
     # Begin Source Files
 
     RelativeFile = .\program.c
-    File = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\program.c
-    UNCFile = \\AEI-OF-WD0048\C\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\program.c
+    File = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Src\program.c
+    UNCFile = \\AEI-OF-WD0048\C\Users\nagabhushana.mallu\Desktop\LDRA_Demo\mian\Src\program.c
 
     # End Source Files
 
@@ -131,7 +131,7 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
     cppexternal_standard = MISRA-C++:2008
     cpp_dialect = GCC
     application_accessed = Testbed
-    sysearch = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\sysearch.dat
+    sysearch = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\sysearch.dat
     sysppvar = <Default search - Source dir(s) - Installdir>
     dynamic_run_number = 1
     history = 10
@@ -422,7 +422,7 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
 
     # Begin Test Case
 
-      File = ..\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\program.c
+      File = ..\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Src\program.c
       Procedure = main
       Procedure Number = 1
       Auto Create Object = T
@@ -971,7 +971,7 @@ bool
 
 # Begin White Files
 
-..\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\program.c
+..\Users\nagabhushana.mallu\Desktop\LDRA_Demo\main\Src\program.c
 
 # End White Files
 
