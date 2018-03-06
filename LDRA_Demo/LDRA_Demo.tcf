@@ -8,15 +8,15 @@
 
     # Begin Source Files
 
-    RelativeFile = .\program.c
-    File = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\program.c
-    UNCFile = \\AEI-OF-WD0048\C\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\program.c
+    RelativeFile = main\Src\program.c
+    File = main\Src\program.c
+    UNCFile = main\Src\program.c
 
     # End Source Files
 
     # Begin Sysearch Include File Entries
 
-    SearchPath = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\
+    SearchPath = main\Src\
     IgnoreInclude_300 = string.h
     IgnoreInclude_300 = Std_Types.h
 
@@ -29,9 +29,9 @@
 
     # Begin Options
 
-    set_attributes = 2 1 1 1 1 0 0 0 0 1 0 1 1 1 0 0 0 0 0 0 0
+    set_attributes = 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
     nb_mechanism = build
-    nb_start_in_dir = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src\
+    nb_start_in_dir = main\Src\
     nb_build_command = gcc "$$h.$$e" -o "$$i$$x$$g"
     nb_compile_command = gcc -c "$$d$$f.$$e"
     nb_link_command = gcc $$h.o -o "$$s"
@@ -58,10 +58,10 @@
     make_greenhills_bld = 0
     set_property = 1
     nb_harness = "$$i$$x$$g"
-    nb_executepath = $(Userdir)\
+    nb_executepath = $(Userdir)
     nb_execute_each_file = F
     nb_pipe_exec = F
-    exhdir = $(Userdir)\
+    exhdir = $(Userdir)
     modinst_exh_stem = $(SourceStem)_$(Modnum)
     using_exhstrip = F
     using_validexh = T
@@ -87,7 +87,6 @@
     syntax_only = F
     include = T
     open_all_includes = F
-    last_complexity_choice = 0
     shorten = T
     tbset_data_file = tbset.dat
     workdir = $(WorkAreadir)LDRA_Demo_tbwrkfls\
@@ -102,7 +101,7 @@
     exe_append = .exe
     cinstr_data_file = <Default>
     cppinstr_data_file = <Default>
-    cpenfile = C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Configuration\Cpen.dat
+    cpenfile = <Default>
     cpppenfile = <Default>
     cvalsfile = <Default>
     cppvalsfile = <Default>
@@ -114,17 +113,14 @@
     cppstandards_model = MISRA-C++:2008
     cppexternal_standard = MISRA-C++:2008
     cpp_dialect = GCC
-    application_accessed = Contestbed
-    application_accessed = TBrun
     application_accessed = Testbed
-    sysearch = C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo - Sysearch.dat
+    sysearch = main\sysearch.dat
     sysppvar = <Default search - Source dir(s) - Installdir>
-    dynamic_run_number = 4
-    data_set_name = demo_seq_01_3_harn_tc1
+    dynamic_run_number = 1
     history = 10
     coverage = 3
     exhwidth = 0
-    logging = T
+    logging = F
     thisdir = F
     forcedataflow = T
     dosnames = F
@@ -134,7 +130,6 @@
     preprocess_iprog = T
     instr_template_io = F
     current_compiler = MinGW200 GCC C/C++ v3.2
-    initial_compiler = MinGW200 GCC C/C++ v3.2
 
     # End Options
 
