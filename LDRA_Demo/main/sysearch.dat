@@ -29,7 +29,7 @@
   0            This macro can be used with, for example, an INCLUDE environment string in
   0            the [<compiler> Build Environment] section of Testbed.ini.
   0
-  1 C:\Users\nagabhushana.mallu\Desktop\LDRA_Demo\Src
+  1 Src\
   0
   0 Type 2   - full or relative directory names,
   0            which are added to the $(Includedirs) macro but not expanded during static analysis for example:
