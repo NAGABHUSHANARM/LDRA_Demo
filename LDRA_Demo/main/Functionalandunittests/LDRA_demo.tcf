@@ -551,6 +551,71 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
         # End Variable
 
     # End Test Case
+    
+    # Begin Test Case
+
+      File = .\Src\program.c
+      Procedure = main
+      Procedure Number = 3
+      Auto Create Object = T
+      Creation Date = Mar 06 2018 16:54:31
+
+        # Begin Variable
+
+          Name = sum
+          Decl_type = int
+          Usage = G
+          Value = 10
+
+        # End Variable
+
+        # Begin Variable
+
+          Name = a
+          Decl_type = int
+          Usage = G
+          Value = 10
+
+        # End Variable
+
+        # Begin Variable
+
+          Name = b
+          Decl_type = int
+          Usage = G
+          Value = 10
+
+        # End Variable
+
+        # Begin Variable
+
+          Name = sum
+          Decl_type = int
+          Usage = H
+          Value = 20
+
+        # End Variable
+
+        # Begin Variable
+
+          Name = stdout
+          Decl_type = stdio
+          Usage = D
+          TBrun Analysis = Suspended
+          Value = 40
+
+        # End Variable
+
+        # Begin Variable
+
+          Name = %
+          Decl_type = int
+          Usage = O
+          Value = 0
+
+        # End Variable
+
+    # End Test Case  
 
     # Begin Global Conversions
 S
