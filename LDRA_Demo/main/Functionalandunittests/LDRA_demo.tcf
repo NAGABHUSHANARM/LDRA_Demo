@@ -592,7 +592,7 @@ $ C:\LDRA_Workarea_9.7.0\LDRA_Demo_tbwrkfls\LDRA_Demo.tcf
           Name = sum
           Decl_type = int
           Usage = H
-          Value = 20
+          Value = 40
 
         # End Variable
 
